@@ -1,0 +1,95 @@
+/* Page styles (plain, archive, 404, search) */
+
+/* archive styles */
+.archive {
+
+  .main {
+    padding: 0;
+  }
+}
+.archive-header {
+  padding: $baseline-height $column * 3;
+
+  p {
+    margin: 0;
+    font-weight: 300;
+  }
+}
+/* 700px */
+@media all and (min-width: 43.75em){
+
+  .archive-header {
+    margin-top: $baseline-height;
+
+    p {
+      font-size: 1.3125em; /* 21px / 16px */
+      line-height: 1.143;
+      font-weight: 100;
+    }
+  }
+}
+
+
+/* plain page & 404 styles */
+
+.error404 {
+
+  .entry {
+    padding-bottom: $baseline-height * 2;
+
+    .search-form-container {
+      margin-top: $baseline-height * 2;
+    }
+  }
+
+}
+
+
+/* 900px */
+@media all and (min-width: 56.25em) {
+
+  .page,
+  .error404 {
+
+    .entry-header {
+      margin: 0 auto;
+      width: $column * 17 * 1.231;
+    }
+    .comments {
+      float: none;
+      margin: $baseline-height * 2 auto;
+    }
+  }
+  .error404 {
+
+    .entry {
+      padding-bottom: $baseline-height * 4;
+    }
+  }
+}
+
+/* search page */
+
+.search {
+
+  .excerpt {
+    padding: 0;
+    margin: $baseline-height * 2 0;
+  }
+  h1 {
+    margin-bottom: $baseline-height * 0.857;
+
+    span {
+      font-weight: 100;
+      display: block;
+      font-size: 0.75em; /* 21px / 16px */
+      line-height: 1.143;
+    }
+  }
+  .loop-pagination {
+    background: none;
+  }
+  .search-bottom {
+    margin: $baseline-height 0 $baseline-height * 3;
+  }
+}

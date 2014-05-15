@@ -1,0 +1,69 @@
+#submit-proxy-checkbox {
+  position: absolute;
+  top: -9999px;
+
+  &:after {
+    content: '';
+    position: fixed;
+    background: rgba(0,0,0,0);
+    transition: background 0.4s ease;
+  }
+}
+.search-form {
+
+  div {
+    position: relative;
+    max-width: $baseline-height * 16;
+    margin: 0 auto;
+  }
+  input {
+    margin: 0;
+    background: white;
+  }
+  input[type="search"]{
+    transform: translateZ(0);
+
+    &:focus {
+      border-color: $gray-medium-light;
+    }
+  }
+  i,
+  input[type="submit"],
+  .submit-proxy {
+    position: absolute;
+    top: 0;
+    backface-visibility: hidden;
+  }
+  i {
+    top: 22%;
+    top: calc(50% - 12px);
+    right: 24px;
+    color: white;
+    z-index: 9;
+    transition: all 0.4s ease;
+    @extend %font-twenty-one;
+  }
+  input[type="submit"],
+  .submit-proxy {
+    border-radius: 0 24px 24px 0;
+    right: 0;
+  }
+  .submit-proxy {
+    background: $gray-dark;
+    height: 50px;
+    width: $baseline-height * 3;
+    z-index: 5;
+  }
+  input[type="submit"] {
+    background: rgba(0,0,0,0.25);
+    width: $baseline-height * 4;
+    z-index: 19;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: rgba(0,0,0,0);
+      border: transparent;
+    }
+  }
+}
