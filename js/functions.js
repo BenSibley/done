@@ -166,4 +166,69 @@ jQuery(document).ready(function($){
         galleryPagination('all');
         $('#portfolio-items').removeAttr('style');
     });
+
+    /* contact form float pattern */
+
+    var contactFormInputs = $('#simple-contact-form').find('input, textarea');
+
+    contactFormInputs.keypress(function(){
+        $(this).parent().find('label').addClass('active');
+    });
+    $('input').blur(function(){
+        if (! this.value) {
+            $(this).parent().find('label').removeClass('active');
+        }
+    });
+
+    /* open contact banner when button is 'tapped' */
+    $('#contact-open-button, #contact-close-button').bind('tap', openContactBanner);
+
+    function openContactBanner(){
+
+        // set variables
+        var bannerContent = $('#banner-content');
+        var contactBanner = $('#contact-banner');
+        var totalHeight = 0;
+
+        // get height of combined children
+        $(bannerContent).children().each(function(){
+            totalHeight = totalHeight + $(this).outerHeight();
+        });
+
+        // change bannerContent height to combined size of children or 0
+        if(!contactBanner.hasClass('open')) {
+            contactBanner.addClass('open');
+            bannerContent.css('height', totalHeight);
+            // smooth scroll to top of banner-content
+            $('html,body').animate({
+                scrollTop: bannerContent.offset().top
+            }, 500);
+            return false;
+        } else {
+            contactBanner.removeClass('open');
+            bannerContent.css('height', 0);
+            // smooth scroll to top of page
+            $('html,body').animate({
+                scrollTop: $('#main').offset().top
+            }, 500);
+            return false;
+        }
+    }
+
+    /* enable smooth scrolling on site */
+    $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 500);
+                    return false;
+                }
+            }
+        });
+    });
+
 });

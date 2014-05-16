@@ -1,0 +1,338 @@
+/* contact banner styles */
+
+.blog,
+.archive {
+
+  .contact-banner {
+    width: 100%;
+    left: 0;
+    padding: $baseline-height * 2.5 $column * 3 0;
+  }
+}
+.single,
+.page {
+
+  .contact-banner {
+    margin-bottom: $baseline-height;
+  }
+}
+.contact-banner {
+  @extend %full-width;
+  background: $green;
+  margin-top: -$baseline-height;
+  padding: $baseline-height * 1.5 $column * 3 * 1.231 0;
+  color: white;
+  text-align: center;
+  background-position: 50% 0%;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $green;
+    opacity: 0.8;
+    z-index: 0;
+  }
+  &.open {
+
+    .top {
+
+      a {
+        color: $green-dark;
+        border-color: $green-dark;
+
+        &:link,
+        &:visited {
+          color: $green-dark;
+        }
+      }
+    }
+  }
+  .top {
+    position: relative;
+    z-index: 9;
+    padding-bottom: $baseline-height;
+
+    h3 {
+      font-size: 1.3125em; /* 21px / 16px */
+      line-height: 1.143;
+      font-weight: 300;
+    }
+    a {
+      color: white;
+      display: inline-block;
+      font-weight: 300;
+      padding: $baseline-height / 4 $baseline-height / 2;
+      border: solid 1px white;
+      border-radius: $baseline-height;
+      margin: $baseline-height 0;
+
+      &:link,
+      &:visited {
+        color: white;
+      }
+      &:hover,
+      &:active,
+      &:focus {
+        color: $green-dark;
+        border-color: $green-dark;
+      }
+    }
+  }
+  .banner-content {
+    height: 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 9;
+    @extend %full-width;
+    padding: 0 $column * 3 * 1.231 0;
+    background: linear-gradient(rgba(60, 189, 120, 0) 0%, rgba(60, 189, 120, 1) 50%);
+    transition: height 0.6s ease;
+
+    img {
+      border-radius: 50%;
+      height: $baseline-height * 4;
+      width: $baseline-height * 4;
+      border: solid 4px $green;
+      margin-top: $baseline-height;
+    }
+    p {
+      font-weight: 300;
+    }
+    span {
+      font-weight: 300;
+      padding-bottom: $baseline-height * 2;
+    }
+    .downward-arrows {
+      display: block;
+      margin: 0 auto;
+      width: 34px;
+      height: 24px;
+      margin-top: 3em;
+
+      .arrow {
+        stroke: white;
+        transition: stroke 0.3s ease;
+      }
+    }
+    .arrow-link {
+
+      &:hover,
+      &:active,
+      &:focus {
+
+        .arrow {
+          stroke: $green-dark;
+        }
+      }
+    }
+    .contact-close-button {
+      display: block;
+      padding-bottom: $baseline-height * 5;
+      color: $green-dark;
+
+      &:link,
+      &:visited {
+        color: $green-dark;
+      }
+      &:hover,
+      &:active,
+      &:focus {
+        color: white;
+      }
+    }
+    /* override any existing styles */
+    .contact-form {
+      padding: $baseline-height * 2 0 $baseline-height;
+
+      label,
+      input,
+      textarea {
+        display: block !important;
+        float: none !important;
+        width: 100% !important;
+        color: white !important;
+        font-weight: 300 !important;
+      }
+      input,
+      textarea {
+        outline: none !important;
+        border: solid 1px white !important;
+        border-radius: $baseline-height !important;
+        max-width: none;
+      }
+      input[type='submit'] {
+        height: 48px !important;
+        padding: 0 !important;
+
+        &:hover,
+        &:active,
+        &:focus {
+          border-color: $green-dark !important;
+        }
+      }
+      ::-webkit-input-placeholder {
+        font-weight: 300;
+        color: white;
+      }
+      :-moz-placeholder /* Firefox 18- */ {
+        font-weight: 300;
+        color: white;
+      }
+      ::-moz-placeholder /* Firefox 19+ */ {
+        font-weight: 300;
+        color: white;
+      }
+      :-ms-input-placeholder {
+        font-weight: 300;
+        color: white;
+      }
+      #simple-contact-form {
+
+        fieldset {
+          position: relative;
+          margin: $baseline-height / 2 0;
+          padding: 0;
+        }
+        label {
+          position: absolute;
+          text-align: left;
+          top: 4px;
+          left: $baseline-height;
+          font-size: 0.75em;
+          opacity: 0;
+          backface-visibility: hidden;
+          transform: translateZ(0);
+
+          color: $green-dark !important;
+          font-weight: 400 !important;
+          transition: all 0.3s ease;
+
+          &.active {
+            opacity: 1;
+            top: 0;
+          }
+        }
+        input {
+          margin: 0;
+          height: 72px;
+        }
+        textarea {
+          margin: 0;
+          padding-top: $baseline-height * 1.4;
+        }
+      }
+      .scf_reset {
+
+        a {
+
+          &:hover,
+          &:active,
+          &:focus {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 600px */
+@media all and (min-width: 37.5em){
+
+  .blog {
+
+    .contact-banner {
+      padding-top: $baseline-height * 3.5;
+    }
+  }
+  .contact-banner {
+    padding-top: $baseline-height * 2.5;
+  }
+}
+
+/* 700px */
+@media all and (min-width: 43.75em){
+
+  .contact-banner {
+
+    .top {
+
+      h3 {
+        float: left;
+      }
+      a {
+        float: right;
+        margin-top: 0;
+      }
+      &:after {
+        @include clearfix;
+      }
+    }
+    .banner-content {
+      padding: 0 20%;
+
+      img {
+        width: $baseline-height * 5;
+        height: $baseline-height * 5;
+      }
+    }
+  }
+}
+
+/* 900px */
+@media all and (min-width: 56.25em){
+
+  .contact-banner {
+
+    .top {
+
+      h3 {
+        font-size: 1.75em; /* 28px / 16px */
+        line-height: 1.714;
+      }
+      a {
+        font-size: 1.3125em; /* 21px / 16px */
+        line-height: 1.143;
+        font-weight: 100;
+      }
+    }
+    .banner-content {
+      padding: 0 25%;
+
+      img {
+        width: $baseline-height * 6;
+        height: $baseline-height * 6;
+      }
+      .contact-close-button {
+        padding-bottom: $baseline-height;
+      }
+    }
+    .arrow-link {
+      display: none;
+    }
+  }
+}
+
+/* 1100px */
+@media all and (min-width: 68.75em){
+
+  .contact-banner {
+
+    .banner-content {
+
+      img {
+        width: $baseline-height * 7;
+        height: $baseline-height * 7;
+      }
+    }
+  }
+}
+
+/* 1200px */
+@media all and (min-width: 75em){
+
+}

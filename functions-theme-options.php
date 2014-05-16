@@ -21,7 +21,7 @@ class ct_theme_options_admin {
      * Options Page title
      * @var string
      */
-    protected $title = 'Theme Options 2';
+    protected $title = 'Banner Options';
 
     /**
      * Constructor
@@ -29,7 +29,7 @@ class ct_theme_options_admin {
      */
     public function __construct() {
         // Set our title
-        $this->title = __( 'Theme Options', 'ct-' );
+        $this->title = __( 'Banner Options', 'ct-' );
     }
 
     /**
@@ -67,7 +67,6 @@ class ct_theme_options_admin {
             <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
             <p>Below are the options for the contact banner.
             General customization options are available in the <a href="../wp-admin/customize.php">customize menu</a>.</p>
-            <h3>Banner Options</h3>
             <?php cmb_metabox_form( self::option_fields(), self::$key ); ?>
             <br />
             <p>Can't find what you're looking for? It's probably in the <a href="../wp-admin/customize.php">customize menu</a>.</p>
@@ -123,10 +122,9 @@ class ct_theme_options_admin {
                 ),
                 array(
                     'name' => __( 'Upload Main Image', 'ct-' ),
-                    'desc' => __( 'add custom image by uploading or selecting from Media', 'ct-' ),
-                    'id'   => 'banner_image_upload',
+                    'desc' => __( 'add custom image by uploading or adding a URL', 'ct-' ),
+                    'id'   => 'banner_main_image_upload',
                     'type' => 'file',
-                    'allow' => array( 'url', 'attachment' ) // limit to just attachments with array( 'attachment' )
                 ),
                 array(
                     'name' => __( 'Content Heading', 'ct-' ),
@@ -137,11 +135,11 @@ class ct_theme_options_admin {
                 array(
                     'name' => 'Main Content',
                     'desc' => 'let visitors know why they should contact you',
-                    'id' => 'banner_textarea',
+                    'id' => 'banner_main_content',
                     'type' => 'textarea'
                 ),
                 array(
-                    'name' => __( 'Use Your Display Name as Author?', 'ct-' ),
+                    'name' => __( 'Use Site Title as Author?', 'ct-' ),
                     'desc' => __( 'Who should be quoted for the above content?', 'ct-' ),
                     'id'   => 'banner_author_radio',
                     'type' => 'radio',
@@ -159,24 +157,19 @@ class ct_theme_options_admin {
                 ),
                 array(
                     'name' => __( 'Contact Form', 'ct-' ),
-                    'id'   => 'banner_contact_form',
+                    'id'   => 'banner_contact_form_radio',
+                    'desc' => 'use the bundled contact plugin or a different one?',
                     'type' => 'radio',
-                    'std'  => 'built-in',
+                    'std'  => 'sbcf',
                     'options' => array(
-                        array( 'name' => 'Use Built-in Contact Form', 'value' => 'built-in' ),
-                        array( 'name' => 'Use a Shortcode', 'value' => 'shortcode' ),
+                        array( 'name' => 'Use "Simple Basic Contact Form"', 'value' => 'sbcf' ),
+                        array( 'name' => 'Use different contact form', 'value' => 'shortcode' ),
                     ),
                 ),
                 array(
                     'name' => __( 'Contact Form Shortcode', 'ct-' ),
                     'desc' => __( 'Use a shortcode from any contact form plugin instead', 'ct-' ),
                     'id'   => 'banner_contact_form_shortcode',
-                    'type' => 'text_medium',
-                ),
-                array(
-                    'name' => __( 'Contact Email', 'ct-' ),
-                    'desc' => __( 'Who should receive the emails from the contact form?', 'ct-' ),
-                    'id'   => 'banner_contact_form_email',
                     'type' => 'text_medium',
                 ),
                 array(
@@ -188,8 +181,21 @@ class ct_theme_options_admin {
                     'options' => array(
                         array( 'name' => 'All pages', 'value' => 'all-pages' ),
                         array( 'name' => 'Portfolio page only', 'value' => 'portfolio' ),
-                        array( 'name' => 'Portfolio & post pages only', 'value' => 'portfolio-posts' ),
+                        array( 'name' => 'I need more control', 'value' => 'more-control' ),
                     ),
+                ),
+                array(
+                    'name' => 'Display banner on:',
+                    'desc' => 'check any page you want the banner to show on',
+                    'id' => 'banner_display_multicheck',
+                    'type' => 'multicheck',
+                    'options' => array(
+                        'portfolio' => 'Portfolio Page',
+                        'posts' => 'Posts',
+                        'projects' => 'Project Pages',
+                        'pages' => 'Pages (regular)',
+                        'archives' => 'Archive Pages (including blog)',
+                    )
                 ),
             ),
         );
@@ -208,8 +214,8 @@ class ct_theme_options_admin {
 }
 
 // Get it started
-$myprefix_Admin = new ct_theme_options_admin();
-$myprefix_Admin->hooks();
+$ct_theme_options_admin = new ct_theme_options_admin();
+$ct_theme_options_admin->hooks();
 
 /**
  * Wrapper function around cmb_get_option

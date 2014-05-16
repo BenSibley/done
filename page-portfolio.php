@@ -4,21 +4,18 @@
  *
  */
 
-/*  */
+get_header(); ?>
 
-get_header();
+<?php get_template_part('banner'); ?>
 
-?>
 <div class='entry-header'>
     <h1 class='entry-title'><?php the_title(); ?></h1>
 </div>
+<?php ct_display_portfolio_items(); ?>
+
+<?php get_footer(); ?>
+
 <?php
-
-
-ct_display_portfolio_items();
-
-get_footer();
-
 /* get the Project Category(ies) for each Project */
 function ct_get_porftolio_item_category($portfolio_item){
     $categories = get_the_terms($portfolio_item->ID, 'done_project_category');
@@ -87,23 +84,4 @@ function ct_display_portfolio_items(){
 
 }
 
-/* get all done_project posts */
-/* sort by a custom meta value i'll add in a meta box. empty = 0 */
-
-/*
- *
- * <ul>
- * foreach(){
- *
- * $category = get_category();
- * $background-image = get_featured-image();
- *
- *      <li class='all $category'>
- *          <div style="background-image: url('$background-image');"></div>
- *      </li>
- * }
- * </ul>
- *
- * Use JS to add the visible class
- */
 

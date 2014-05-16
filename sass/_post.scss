@@ -201,7 +201,7 @@
         right: 0;
         left: 0;
         background: rgba(43,43,43,0.6);
-        background: linear-gradient(to bottom, transparent, rgba(43,43,43,0.25), rgba(43,43,43,0.75), rgba(43,43,43,1) ); /* $gray-dark */
+        background: linear-gradient(to bottom, transparent 25%, rgba(43,43,43,0.9) 100%); /* $gray-dark */
       }
     }
   }

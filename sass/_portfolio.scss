@@ -2,9 +2,14 @@
 
 .page-template-page-portfolio-php {
 
+  .main {
+    position: relative;
+    background: white;
+  }
   .entry-header {
     text-align: center;
     backface-visibility: hidden;
+    margin-top: $baseline-height;
   }
   .portfolio-items {
     list-style: none;
@@ -175,6 +180,9 @@
     margin-top: $baseline-height;
     text-align: right;
 
+    &:hover {
+      cursor: pointer;
+    }
     span {
       float: left;
     }

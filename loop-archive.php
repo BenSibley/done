@@ -1,6 +1,5 @@
 <?php
 
-get_template_part('banner');
 
 if ( have_posts() ) :
     while (have_posts() ) :

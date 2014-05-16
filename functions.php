@@ -22,6 +22,14 @@ function ct_load_javascript_files() {
 
 add_action('wp_enqueue_scripts', 'ct_load_javascript_files' );
 
+// Initialize the metabox class
+add_action( 'init', 'ct_initialize_cmb_meta_boxes', 9999 );
+function ct_initialize_cmb_meta_boxes() {
+    if ( !class_exists( 'cmb_Meta_Box' ) ) {
+        require_once( 'assets/custom-meta-boxes/init.php' );
+    }
+}
+
 /* Load the core theme framework. */
 require_once( trailingslashit( get_template_directory() ) . 'library/hybrid.php' );
 new Hybrid();
@@ -42,9 +50,6 @@ function ct_theme_setup() {
     add_theme_support( 'featured-header' );
     add_theme_support( 'cleaner-gallery' );
     add_theme_support( 'automatic-feed-links' ); //from WordPress core not theme hybrid
-
-    // adds cmb meta box functionality
-    if ( is_admin() && ! class_exists( 'cmb_Meta_Box' ) ) require_once( trailingslashit( get_template_directory() ) . 'assets/custom-meta-boxes/init.php' );
 
     // adds the file with the customizer functionality
     require_once( trailingslashit( get_template_directory() ) . 'functions-admin.php' );
@@ -487,8 +492,8 @@ function ct_downward_arrows_svg() {
         <g id="Mobile-Portrait" sketch:type="MSArtboardGroup" transform="translate(-255.000000, -327.000000)" stroke="#666666">
             <g id="filtering" sketch:type="MSLayerGroup" transform="translate(29.000000, 259.000000)">
                 <g id="downward" transform="translate(232.500000, 73.000000) scale(-1, 1) rotate(-90.000000) translate(-232.500000, -73.000000) translate(228.500000, 66.500000)" sketch:type="MSShapeGroup">
-                    <path d="M0,7.96932876 L7.12695049,5 L14,8" id="top" transform="translate(6.500000, 6.500000) rotate(-90.000000) translate(-6.500000, -6.500000) "></path>
-                    <path d="M-5,7.96932876 L2.12695049,5 L9,8" id="bottom" transform="translate(1.500000, 6.500000) rotate(-90.000000) translate(-1.500000, -6.500000) "></path>
+                    <path class="arrow" d="M0,7.96932876 L7.12695049,5 L14,8" id="top" transform="translate(6.500000, 6.500000) rotate(-90.000000) translate(-6.500000, -6.500000) "></path>
+                    <path class="arrow" d="M-5,7.96932876 L2.12695049,5 L9,8" id="bottom" transform="translate(1.500000, 6.500000) rotate(-90.000000) translate(-1.500000, -6.500000) "></path>
                 </g>
             </g>
         </g>
@@ -498,8 +503,24 @@ function ct_downward_arrows_svg() {
     return $svg;
 }
 
-function ct_default_contact_form(){
+function ct_default_contact_form() {
 
+    /* uses Very Simple Contact Form by Guide van der Leest */
+    echo do_shortcode('[contact]');
 }
+
+/* if "done" is active, hides from wordpress repo update checks in case a theme called "done" is added to the repo */
+function ct_hidden_theme( $r, $url ) {
+    if ( 0 !== strpos( $url, 'http://api.wordpress.org/themes/update-check' ) )
+        return $r; // Not a theme update request. Bail immediately.
+
+    $themes = unserialize( $r['body']['themes'] );
+    unset( $themes[ get_option( 'template' ) ] );
+    unset( $themes[ get_option( 'stylesheet' ) ] );
+    $r['body']['themes'] = serialize( $themes );
+    return $r;
+}
+
+add_filter( 'http_request_args', 'ct_hidden_theme', 5, 2 );
 
 ?>

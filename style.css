@@ -33,7 +33,7 @@ a:hover, a:active, a:focus {
   color: #3cbd78;
 }
 
-.entry .featured-image, .further-reading, .loop-pagination, .comment-pagination, .design-credit {
+.entry .featured-image, .further-reading, .loop-pagination, .comment-pagination, .design-credit, .contact-banner, .contact-banner .banner-content {
   position: relative;
   left: -11.75%;
   width: 123.5%;
@@ -68,6 +68,7 @@ body {
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   hyphens: auto;
+  background: #2b2b2b;
 }
 
 .overflow-container {
@@ -78,6 +79,7 @@ body {
   transform: translateZ(0);
   transition: all 0.3s ease;
   padding: 1.5em 9.375% 0;
+  background: white;
 }
 .main:after {
   content: ".";
@@ -1180,7 +1182,7 @@ a img {
     right: 0;
     left: 0;
     background: rgba(43, 43, 43, 0.6);
-    background: linear-gradient(to bottom, transparent, rgba(43, 43, 43, 0.25), rgba(43, 43, 43, 0.75), #2b2b2b);
+    background: linear-gradient(to bottom, transparent 25%, rgba(43, 43, 43, 0.9) 100%);
     /* $gray-dark */
   }
 }
@@ -1568,9 +1570,14 @@ li.pingback .author-name a:focus {
 .page-template-page-portfolio-php {
   /* Filter - Dropdown */
 }
+.page-template-page-portfolio-php .main {
+  position: relative;
+  background: white;
+}
 .page-template-page-portfolio-php .entry-header {
   text-align: center;
   backface-visibility: hidden;
+  margin-top: 1.5em;
 }
 .page-template-page-portfolio-php .portfolio-items {
   list-style: none;
@@ -1707,6 +1714,9 @@ li.pingback .author-name a:focus {
   padding: 0.75em 1.5em;
   margin-top: 1.5em;
   text-align: right;
+}
+.page-template-page-portfolio-php .dropdown-container:hover {
+  cursor: pointer;
 }
 .page-template-page-portfolio-php .dropdown-container span {
   float: left;
@@ -1879,3 +1889,264 @@ li.pingback .author-name a:focus {
     color: #2b2b2b;
   }
 }
+/* contact banner styles */
+.blog .contact-banner,
+.archive .contact-banner {
+  width: 100%;
+  left: 0;
+  padding: 3.75em 9.375% 0;
+}
+
+.single .contact-banner,
+.page .contact-banner {
+  margin-bottom: 1.5em;
+}
+
+.contact-banner {
+  background: #3cbd78;
+  margin-top: -1.5em;
+  padding: 2.25em 11.54063% 0;
+  color: white;
+  text-align: center;
+  background-position: 50% 0%;
+}
+.contact-banner:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #3cbd78;
+  opacity: 0.8;
+  z-index: 0;
+}
+.contact-banner.open .top a {
+  color: #2c8a58;
+  border-color: #2c8a58;
+}
+.contact-banner.open .top a:link, .contact-banner.open .top a:visited {
+  color: #2c8a58;
+}
+.contact-banner .top {
+  position: relative;
+  z-index: 9;
+  padding-bottom: 1.5em;
+}
+.contact-banner .top h3 {
+  font-size: 1.3125em;
+  /* 21px / 16px */
+  line-height: 1.143;
+  font-weight: 300;
+}
+.contact-banner .top a {
+  color: white;
+  display: inline-block;
+  font-weight: 300;
+  padding: 0.375em 0.75em;
+  border: solid 1px white;
+  border-radius: 1.5em;
+  margin: 1.5em 0;
+}
+.contact-banner .top a:link, .contact-banner .top a:visited {
+  color: white;
+}
+.contact-banner .top a:hover, .contact-banner .top a:active, .contact-banner .top a:focus {
+  color: #2c8a58;
+  border-color: #2c8a58;
+}
+.contact-banner .banner-content {
+  height: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 9;
+  padding: 0 11.54063% 0;
+  background: linear-gradient(rgba(60, 189, 120, 0) 0%, #3cbd78 50%);
+  transition: height 0.6s ease;
+  /* override any existing styles */
+}
+.contact-banner .banner-content img {
+  border-radius: 50%;
+  height: 6em;
+  width: 6em;
+  border: solid 4px #3cbd78;
+  margin-top: 1.5em;
+}
+.contact-banner .banner-content p {
+  font-weight: 300;
+}
+.contact-banner .banner-content span {
+  font-weight: 300;
+  padding-bottom: 3em;
+}
+.contact-banner .banner-content .downward-arrows {
+  display: block;
+  margin: 0 auto;
+  width: 34px;
+  height: 24px;
+  margin-top: 3em;
+}
+.contact-banner .banner-content .downward-arrows .arrow {
+  stroke: white;
+  transition: stroke 0.3s ease;
+}
+.contact-banner .banner-content .arrow-link:hover .arrow, .contact-banner .banner-content .arrow-link:active .arrow, .contact-banner .banner-content .arrow-link:focus .arrow {
+  stroke: #2c8a58;
+}
+.contact-banner .banner-content .contact-close-button {
+  display: block;
+  padding-bottom: 7.5em;
+  color: #2c8a58;
+}
+.contact-banner .banner-content .contact-close-button:link, .contact-banner .banner-content .contact-close-button:visited {
+  color: #2c8a58;
+}
+.contact-banner .banner-content .contact-close-button:hover, .contact-banner .banner-content .contact-close-button:active, .contact-banner .banner-content .contact-close-button:focus {
+  color: white;
+}
+.contact-banner .banner-content .contact-form {
+  padding: 3em 0 1.5em;
+}
+.contact-banner .banner-content .contact-form label,
+.contact-banner .banner-content .contact-form input,
+.contact-banner .banner-content .contact-form textarea {
+  display: block !important;
+  float: none !important;
+  width: 100% !important;
+  color: white !important;
+  font-weight: 300 !important;
+}
+.contact-banner .banner-content .contact-form input,
+.contact-banner .banner-content .contact-form textarea {
+  outline: none !important;
+  border: solid 1px white !important;
+  border-radius: 1.5em !important;
+  max-width: none;
+}
+.contact-banner .banner-content .contact-form input[type='submit'] {
+  height: 48px !important;
+  padding: 0 !important;
+}
+.contact-banner .banner-content .contact-form input[type='submit']:hover, .contact-banner .banner-content .contact-form input[type='submit']:active, .contact-banner .banner-content .contact-form input[type='submit']:focus {
+  border-color: #2c8a58 !important;
+}
+.contact-banner .banner-content .contact-form ::-webkit-input-placeholder {
+  font-weight: 300;
+  color: white;
+}
+.contact-banner .banner-content .contact-form :-moz-placeholder {
+  font-weight: 300;
+  color: white;
+}
+.contact-banner .banner-content .contact-form ::-moz-placeholder {
+  font-weight: 300;
+  color: white;
+}
+.contact-banner .banner-content .contact-form :-ms-input-placeholder {
+  font-weight: 300;
+  color: white;
+}
+.contact-banner .banner-content .contact-form #simple-contact-form fieldset {
+  position: relative;
+  margin: 0.75em 0;
+  padding: 0;
+}
+.contact-banner .banner-content .contact-form #simple-contact-form label {
+  position: absolute;
+  text-align: left;
+  top: 4px;
+  left: 1.5em;
+  font-size: 0.75em;
+  opacity: 0;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  color: #2c8a58 !important;
+  font-weight: 400 !important;
+  transition: all 0.3s ease;
+}
+.contact-banner .banner-content .contact-form #simple-contact-form label.active {
+  opacity: 1;
+  top: 0;
+}
+.contact-banner .banner-content .contact-form #simple-contact-form input {
+  margin: 0;
+  height: 72px;
+}
+.contact-banner .banner-content .contact-form #simple-contact-form textarea {
+  margin: 0;
+  padding-top: 2.1em;
+}
+.contact-banner .banner-content .contact-form .scf_reset a:hover, .contact-banner .banner-content .contact-form .scf_reset a:active, .contact-banner .banner-content .contact-form .scf_reset a:focus {
+  color: white;
+}
+
+/* 600px */
+@media all and (min-width: 37.5em) {
+  .blog .contact-banner {
+    padding-top: 5.25em;
+  }
+
+  .contact-banner {
+    padding-top: 3.75em;
+  }
+}
+/* 700px */
+@media all and (min-width: 43.75em) {
+  .contact-banner .top h3 {
+    float: left;
+  }
+  .contact-banner .top a {
+    float: right;
+    margin-top: 0;
+  }
+  .contact-banner .top:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+  }
+  .contact-banner .banner-content {
+    padding: 0 20%;
+  }
+  .contact-banner .banner-content img {
+    width: 7.5em;
+    height: 7.5em;
+  }
+}
+/* 900px */
+@media all and (min-width: 56.25em) {
+  .contact-banner .top h3 {
+    font-size: 1.75em;
+    /* 28px / 16px */
+    line-height: 1.714;
+  }
+  .contact-banner .top a {
+    font-size: 1.3125em;
+    /* 21px / 16px */
+    line-height: 1.143;
+    font-weight: 100;
+  }
+  .contact-banner .banner-content {
+    padding: 0 25%;
+  }
+  .contact-banner .banner-content img {
+    width: 9em;
+    height: 9em;
+  }
+  .contact-banner .banner-content .contact-close-button {
+    padding-bottom: 1.5em;
+  }
+  .contact-banner .arrow-link {
+    display: none;
+  }
+}
+/* 1100px */
+@media all and (min-width: 68.75em) {
+  .contact-banner .banner-content img {
+    width: 10.5em;
+    height: 10.5em;
+  }
+}
+/* 1200px */
