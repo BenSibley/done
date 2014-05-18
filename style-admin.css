@@ -1,0 +1,12 @@
+.cmb_id_banner_main_image_upload,
+.cmb_id_banner_author,
+.cmb_id_banner_contact_form_shortcode,
+.cmb_id_banner_display_multicheck {
+    background: #dddddd;
+}
+.cmb_id_banner_main_image_upload th,
+.cmb_id_banner_author th,
+.cmb_id_banner_contact_form_shortcode th,
+.cmb_id_banner_display_multicheck th {
+    text-align: right;
+}

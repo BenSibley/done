@@ -3,13 +3,13 @@
  * CMB Theme Options
  * @version 0.1.0
  */
-class ct_theme_options_admin {
+class compete_themes_theme_options_admin {
 
     /**
      * Option key, and option page slug
      * @var string
      */
-    protected static $key = 'ct_theme_options';
+    protected static $key = 'compete_themes_theme_options';
 
     /**
      * Array of metaboxes/fields
@@ -133,8 +133,8 @@ class ct_theme_options_admin {
                     'type' => 'text',
                 ),
                 array(
-                    'name' => 'Main Content',
-                    'desc' => 'let visitors know why they should contact you',
+                    'name' => __('Main Content'),
+                    'desc' => __('let visitors know why they should contact you'),
                     'id' => 'banner_main_content',
                     'type' => 'textarea'
                 ),
@@ -157,8 +157,8 @@ class ct_theme_options_admin {
                 ),
                 array(
                     'name' => __( 'Contact Form', 'ct-' ),
+                    'desc' => __('use the bundled contact plugin or a different one?'),
                     'id'   => 'banner_contact_form_radio',
-                    'desc' => 'use the bundled contact plugin or a different one?',
                     'type' => 'radio',
                     'std'  => 'sbcf',
                     'options' => array(
@@ -174,19 +174,20 @@ class ct_theme_options_admin {
                 ),
                 array(
                     'name' => __( 'Display Options', 'ct-' ),
+                    'description' => __('what pages should the banner show on?'),
                     'id'   => 'banner_display_options',
                     'type' => 'radio',
-                    'description' => 'what pages should the banner show on?',
                     'std'  => 'all-pages',
                     'options' => array(
                         array( 'name' => 'All pages', 'value' => 'all-pages' ),
                         array( 'name' => 'Portfolio page only', 'value' => 'portfolio' ),
+                        array( 'name' => 'Do not display', 'value' => 'no-pages' ),
                         array( 'name' => 'I need more control', 'value' => 'more-control' ),
                     ),
                 ),
                 array(
-                    'name' => 'Display banner on:',
-                    'desc' => 'check any page you want the banner to show on',
+                    'name' => __('Display banner on:'),
+                    'desc' => __('check any page you want the banner to show on'),
                     'id' => 'banner_display_multicheck',
                     'type' => 'multicheck',
                     'options' => array(
@@ -194,8 +195,20 @@ class ct_theme_options_admin {
                         'posts' => 'Posts',
                         'projects' => 'Project Pages',
                         'pages' => 'Pages (regular)',
-                        'archives' => 'Archive Pages (including blog)',
+                        'home' => 'Blog',
+                        'archives' => 'Archive Pages',
                     )
+                ),
+                array(
+                    'name' => __( 'Color Theme', 'ct-' ),
+                    'desc' => __('try the dark theme if the white text is hard to read'),
+                    'id'   => 'banner_theme',
+                    'type' => 'radio',
+                    'std'  => 'light',
+                    'options' => array(
+                        array( 'name' => 'Light', 'value' => 'light' ),
+                        array( 'name' => 'Dark', 'value' => 'dark' ),
+                    ),
                 ),
             ),
         );
@@ -214,8 +227,8 @@ class ct_theme_options_admin {
 }
 
 // Get it started
-$ct_theme_options_admin = new ct_theme_options_admin();
-$ct_theme_options_admin->hooks();
+$compete_themes_theme_options_admin = new compete_themes_theme_options_admin();
+$compete_themes_theme_options_admin->hooks();
 
 /**
  * Wrapper function around cmb_get_option
@@ -223,6 +236,6 @@ $ct_theme_options_admin->hooks();
  * @param  string  $key Options array key
  * @return mixed        Option value
  */
-function ct_get_option( $key = '' ) {
-    return cmb_get_option( ct_theme_options_admin::key(), $key );
+function compete_themes_get_option( $key = '' ) {
+    return cmb_get_option( compete_themes_theme_options_admin::key(), $key );
 }

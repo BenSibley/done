@@ -29,9 +29,9 @@
  * TGM_Plugin_Activation class constructor.
  */
 
-add_action( 'tgmpa_register', 'ct_done_register_required_plugins' );
+add_action( 'tgmpa_register', 'compete_themes_register_required_plugins' );
 
-function ct_done_register_required_plugins() {
+function compete_themes_register_required_plugins() {
 
     /**
      * Array of plugin arrays. Required keys are name and slug.
@@ -49,7 +49,12 @@ function ct_done_register_required_plugins() {
             'force_activation'   => true, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
             'force_deactivation' => false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins.
             'external_url'       => '', // If set, overrides default API URL and points to an external URL.
-        )
+        ),
+        array(
+            'name'      => 'Simple Basic Contact Form',
+            'slug'      => 'simple-basic-contact-form',
+            'required'  => true,
+        ),
     );
 
     /**

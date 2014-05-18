@@ -47,9 +47,13 @@ $rss: #fa9b39;
 
 /*===== Placeholders =====*/
 
+%font-twenty-eight {
+  font-size: 1.75em; /* 28px / 16px */
+  line-height: 1.321; /* 37px / 28px */
+}
 %font-twenty-one {
   font-size: 1.3125em; /* 21px / 16px */
-  line-height: 1.143;
+  line-height: 1.143; /* 24px / 21px */
 }
 %link-gray {
   color: $gray;

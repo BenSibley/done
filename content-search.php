@@ -6,7 +6,7 @@
     </div>
     <div class='excerpt-content'>
         <article>
-            <?php ct_excerpt(); ?>
+            <?php compete_themes_excerpt(); ?>
         </article>
     </div>
 </div>

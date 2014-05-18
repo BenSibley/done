@@ -10,13 +10,20 @@ jQuery(document).ready(function($){
             $('#site-header').removeClass('toggled')
             $('#menu-primary').css('height', 'auto');
             $(window).unbind('scroll');
+            $('#menu-primary').find('a, input').attr('tabindex', -1);
         } else {
             var bodyHeight = $('body').height();
             $('#site-header').addClass('toggled')
             $('#menu-primary').css('height', bodyHeight);
             $(window).scroll(onScroll);
+            $('#menu-primary').find('a, input').attr('tabindex', 0);
         }
     }
+    /* at mobile width, don't include nav items unless menu opened */
+    if($(window).width() < 700){
+        $('#menu-primary').find('a, input').attr('tabindex', -1);
+    }
+
     function onScroll() {
         var menuItemsBottom = $('#menu-primary > ul').offset().top + $('#menu-primary > ul').height();
 
@@ -55,9 +62,11 @@ jQuery(document).ready(function($){
         $('#portfolio-items li').removeClass((function (index, css) {
             return (css.match (/\bitem-\S+/g) || []).join(' ');
         }));
+        $('#portfolio-items li a').attr('tabindex', -1);
 
         if($(window).width() < 700){
             $('#portfolio-items li.' + liClass + ':lt(3)').addClass('page-1 visible');
+            $('#portfolio-items li.' + liClass + ':lt(3) a').attr('tabindex', 0);
             $('#portfolio-items li.' + liClass + ':lt(6):not(.page-1)').addClass('page-2');
             $('#portfolio-items li.' + liClass + ':lt(9):not(.page-1, .page-2)').addClass('page-3');
             $('#portfolio-items li.' + liClass + ':lt(12):not(.page-1, .page-2, .page-3)').addClass('page-4');
@@ -66,6 +75,7 @@ jQuery(document).ready(function($){
         }
         if ($(window).width() > 699 ) {
             $('#portfolio-items li.' + liClass + ':lt(6)').addClass('page-1 visible');
+            $('#portfolio-items li.' + liClass + ':lt(6) a').attr('tabindex', 0);
             $('#portfolio-items li.' + liClass + ':lt(12):not(.page-1)').addClass('page-2');
             $('#portfolio-items li.' + liClass + ':lt(18):not(.page-1, .page-2)').addClass('page-3');
         }
@@ -118,7 +128,9 @@ jQuery(document).ready(function($){
             $(this).addClass('current');
             var count = $(this).index() + 1;
             $('.portfolio-item').removeClass('visible');
+            $('.portfolio-item a').attr('tabindex', -1);
             $('.portfolio-item.page-' + count + '').addClass('visible');
+            $('.portfolio-item.page-' + count + ' a').attr('tabindex', 0);
         }
 
         /* make sure the gallery height doesn't shrink */
@@ -168,7 +180,6 @@ jQuery(document).ready(function($){
     });
 
     /* contact form float pattern */
-
     var contactFormInputs = $('#simple-contact-form').find('input, textarea');
 
     contactFormInputs.keypress(function(){
@@ -203,6 +214,9 @@ jQuery(document).ready(function($){
             $('html,body').animate({
                 scrollTop: bannerContent.offset().top
             }, 500);
+            $(contactBanner).find('input:not(:hidden), a:not("#contact-open-button"), textarea').each(function() {
+                $(this).attr('tabindex', 0);
+            });
             return false;
         } else {
             contactBanner.removeClass('open');
@@ -211,9 +225,24 @@ jQuery(document).ready(function($){
             $('html,body').animate({
                 scrollTop: $('#main').offset().top
             }, 500);
+            $(contactBanner).find('input:not(:hidden), a:not("#contact-open-button"), textarea').each(function() {
+                $(this).attr('tabindex', -1);
+            });
             return false;
         }
     }
+
+    /* contact banner accessibility - remove keyboard accessibility of banner when closed */
+    $('#contact-banner').find('input:not(:hidden), a:not("#contact-open-button"), textarea').each(function() {
+        $(this).attr('tabindex', -1);
+    });
+    /* enable hover effects on portfolio items with keyboard accessibility */
+    $('.image-link, .title-link').focus(function(){
+        $(this).parents('li').addClass('focused');
+    });
+    $('.image-link, .title-link').focusout(function(){
+        $(this).parents('li').removeClass('focused');
+    });
 
     /* enable smooth scrolling on site */
     $(function() {

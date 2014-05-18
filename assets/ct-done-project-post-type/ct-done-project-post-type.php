@@ -6,8 +6,8 @@ Author: Compete Themes
 Version: 1.0
 */
 
-add_action( 'init', 'ct_done_create_project_post_type' );
-function ct_done_create_project_post_type() {
+add_action( 'init', 'compete_themes_create_project_post_type' );
+function compete_themes_create_project_post_type() {
     register_post_type( 'done_project',
         array(
             'labels' => array(
@@ -35,9 +35,9 @@ function ct_done_create_project_post_type() {
 }
 
 // create the taxonomy/categories for Projects
-add_action( 'init', 'ct_done_create_project_post_taxonomy', 0 );
+add_action( 'init', 'compete_themes_create_project_post_taxonomy', 0 );
 
-function ct_done_create_project_post_taxonomy() {
+function compete_themes_create_project_post_taxonomy() {
     // Add new taxonomy, make it hierarchical (like categories)
     $labels = array(
         'name'              => _x( 'Categories', 'categories' ),

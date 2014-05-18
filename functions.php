@@ -1,7 +1,7 @@
 <?php
 
 // register and enqueue all of the scripts used by Aside
-function ct_load_javascript_files() {
+function compete_themes_load_javascript_files() {
 
     wp_register_style( 'google-fonts', '//fonts.googleapis.com/css?family=Roboto+Slab:100,300,400');
     wp_register_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
@@ -20,11 +20,21 @@ function ct_load_javascript_files() {
     if( is_singular() && comments_open() && get_option('thread_comments') ) wp_enqueue_script( 'comment-reply' ); 
 }
 
-add_action('wp_enqueue_scripts', 'ct_load_javascript_files' );
+add_action('wp_enqueue_scripts', 'compete_themes_load_javascript_files' );
+
+function compete_themes_enqueue_admin_scripts($hook){
+
+    if ( 'toplevel_page_compete_themes_theme_options' == $hook) {
+        wp_enqueue_script('functions-admin', get_template_directory_uri() . '/js/functions-admin.js', array('jquery'),'', true);
+        wp_enqueue_style('style-admin', get_template_directory_uri() . '/style-admin.css');
+    }
+}
+
+add_action('admin_enqueue_scripts',	'compete_themes_enqueue_admin_scripts' );
 
 // Initialize the metabox class
-add_action( 'init', 'ct_initialize_cmb_meta_boxes', 9999 );
-function ct_initialize_cmb_meta_boxes() {
+add_action( 'init', 'compete_themes_initialize_cmb_meta_boxes', 9999 );
+function compete_themes_initialize_cmb_meta_boxes() {
     if ( !class_exists( 'cmb_Meta_Box' ) ) {
         require_once( 'assets/custom-meta-boxes/init.php' );
     }
@@ -35,9 +45,9 @@ require_once( trailingslashit( get_template_directory() ) . 'library/hybrid.php'
 new Hybrid();
 
 /* Do theme setup on the 'after_setup_theme' hook. */
-add_action( 'after_setup_theme', 'ct_theme_setup', 10 );
+add_action( 'after_setup_theme', 'compete_themes_theme_setup', 10 );
 
-function ct_theme_setup() {
+function compete_themes_theme_setup() {
 	
     /* Get action/filter hook prefix. */
 	$prefix = hybrid_get_prefix();
@@ -46,6 +56,7 @@ function ct_theme_setup() {
     add_theme_support( 'hybrid-core-menus', array( 'primary', 'secondary' ));
     add_theme_support( 'hybrid-core-template-hierarchy' );
     add_theme_support( 'hybrid-core-styles', array( 'style', 'reset', 'gallery' ) );
+    add_theme_support( 'hybrid-core-sidebars', array( 'after-content' ) );
     add_theme_support( 'loop-pagination' );
     add_theme_support( 'featured-header' );
     add_theme_support( 'cleaner-gallery' );
@@ -60,13 +71,13 @@ function ct_theme_setup() {
     // require TGM Plugin Activation
     require_once( trailingslashit( get_template_directory() ) . 'assets/TGM/class-tgm-plugin-activation.php' );
     // require file used to register required plugins
-    require_once( trailingslashit( get_template_directory() ) . 'assets/TGM/ct_done_require_plugins.php' );
+    require_once( trailingslashit( get_template_directory() ) . 'assets/TGM/compete_themes_require_plugins.php' );
 }
 
 // takes user input from the customizer and outputs linked social media icons
-function ct_social_media_icons() {
+function compete_themes_social_media_icons() {
     
-    $social_sites = ct_customizer_social_media_array();
+    $social_sites = compete_themes_customizer_social_media_array();
     	
     // any inputs that aren't empty are stored in $active_sites array
     foreach($social_sites as $social_site) {
@@ -94,7 +105,7 @@ function ct_social_media_icons() {
 }
 
 // Creates the next/previous post section below every post
-function ct_further_reading() {
+function compete_themes_further_reading() {
 
     global $post;
 
@@ -125,12 +136,12 @@ function ct_further_reading() {
 
     echo "<nav class='further-reading'>";
     if($previous_blog_post) {
-        echo "<a class='prev' href='".get_permalink($previous_blog_post)."'>" . ct_left_arrows_svg() . " $previous_text <span class='screen-reader-text'>" . $previous_title . "</span></a>";
+        echo "<a class='prev' href='".get_permalink($previous_blog_post)."'>" . compete_themes_left_arrows_svg() . " $previous_text <span class='screen-reader-text'>" . $previous_title . "</span></a>";
     } else {
         echo "<a class='prev' href='".esc_url(home_url())."'>Return Home</a>";
     }
     if($next_blog_post) {
-        echo "<a class='next' href='".get_permalink($next_blog_post)."'>$next_text <span class='screen-reader-text'>" . $next_title . "</span>" . ct_right_arrows_svg() . "</a>";
+        echo "<a class='next' href='".get_permalink($next_blog_post)."'>$next_text <span class='screen-reader-text'>" . $next_title . "</span>" . compete_themes_right_arrows_svg() . "</a>";
     } else {
         echo "<a class='next' href='".esc_url(home_url())."'>Return Home</a>";
     }
@@ -138,7 +149,7 @@ function ct_further_reading() {
 }
 
 // Outputs the categories the post was included in with their names hyperlinked to their permalink
-function ct_category_display() {
+function compete_themes_category_display() {
        
     $categories = get_the_category();
     $separator = ' & ';
@@ -146,7 +157,7 @@ function ct_category_display() {
     if($categories){
 	    echo "<p>";
         foreach($categories as $category) {
-            $output .= '<a href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( "View all posts in %s", 'ct_replace_me' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
+            $output .= '<a href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( "View all posts in %s", 'done' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
         }
         echo trim($output, $separator);
 	    echo "</p>";
@@ -154,7 +165,7 @@ function ct_category_display() {
 }
 
 // Outputs the tags the post used with their names hyperlinked to their permalink
-function ct_tags_display() {
+function compete_themes_tags_display() {
        
     $tags = get_the_tags();
     $separator = ', ';
@@ -162,7 +173,7 @@ function ct_tags_display() {
     if($tags){
         echo "<div class='entry-tags'><span>Tags</span><p>";
         foreach($tags as $tag) {
-            $output .= '<a href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( "View all posts tagged %s", 'ct_replace_me' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator;
+            $output .= '<a href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( "View all posts tagged %s", 'done' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator;
         }
         echo trim($output, $separator);
 	    echo "</p></div>";
@@ -170,7 +181,7 @@ function ct_tags_display() {
 }
 
 /* added to customize the comments. Same as default except -> added use of gravatar images for comment authors */
-function ct_customize_comments( $comment, $args, $depth ) {
+function compete_themes_customize_comments( $comment, $args, $depth ) {
     $GLOBALS['comment'] = $comment;
  
     ?>
@@ -184,12 +195,12 @@ function ct_customize_comments( $comment, $args, $depth ) {
             </div>
             <div class="comment-content">
                 <?php if ($comment->comment_approved == '0') : ?>
-                    <em><?php _e('Your comment is awaiting moderation.', 'ct_replace_me') ?></em>
+                    <em><?php _e('Your comment is awaiting moderation.', 'done') ?></em>
                     <br />
                 <?php endif; ?>
                 <?php comment_text(); ?>
             </div>
-            <?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply', 'ct_replace_me' ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+            <?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply', 'done' ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
             <?php edit_comment_link( 'edit' ); ?>
         </article>
     </li>
@@ -197,7 +208,7 @@ function ct_customize_comments( $comment, $args, $depth ) {
 }
 
 /* added HTML5 placeholders for each default field */
-function ct_update_fields($fields) {
+function compete_themes_update_fields($fields) {
 
     $commenter = wp_get_current_commenter();
     $req = get_option( 'require_name_email' );
@@ -226,9 +237,9 @@ function ct_update_fields($fields) {
     
 	return $fields;
 }
-add_filter('comment_form_default_fields','ct_update_fields');
+add_filter('comment_form_default_fields','compete_themes_update_fields');
 
-function ct_update_comment_field($comment_field) {
+function compete_themes_update_comment_field($comment_field) {
 	
 	$comment_field = 
 		'<p class="comment-form-comment">
@@ -238,10 +249,10 @@ function ct_update_comment_field($comment_field) {
 	
 	return $comment_field;
 }
-add_filter('comment_form_field_comment','ct_update_comment_field');
+add_filter('comment_form_field_comment','compete_themes_update_comment_field');
 
 // for 'read more' tag excerpts
-function ct_excerpt() {
+function compete_themes_excerpt() {
 	
 	global $post;
 	// check for the more tag
@@ -262,38 +273,38 @@ function ct_excerpt() {
 }
 
 // for custom & automatic excerpts
-function ct_excerpt_read_more_link($output) {
+function compete_themes_excerpt_read_more_link($output) {
 	global $post;
 	return $output . "<p><a class='more-link' href='". get_permalink() ."'>Read the Post <span class='screen-reader-text'>" . get_the_title() . "</span></a></p>";
 }
 
-add_filter('the_excerpt', 'ct_excerpt_read_more_link');
+add_filter('the_excerpt', 'compete_themes_excerpt_read_more_link');
 
 // change the length of the excerpts
-function ct_custom_excerpt_length( $length ) {
+function compete_themes_custom_excerpt_length( $length ) {
     return 18;
 }
-add_filter( 'excerpt_length', 'ct_custom_excerpt_length', 999 );
+add_filter( 'excerpt_length', 'compete_themes_custom_excerpt_length', 999 );
 
 // switch [...] to ellipsis on automatic excerpt
-function ct_new_excerpt_more( $more ) {
+function compete_themes_new_excerpt_more( $more ) {
 	return '&#8230;';
 }
-add_filter('excerpt_more', 'ct_new_excerpt_more');
+add_filter('excerpt_more', 'compete_themes_new_excerpt_more');
 
 // turns of the automatic scrolling to the read more link 
-function ct_remove_more_link_scroll( $link ) {
+function compete_themes_remove_more_link_scroll( $link ) {
 	$link = preg_replace( '|#more-[0-9]+|', '', $link );
 	return $link;
 }
 
-add_filter( 'the_content_more_link', 'ct_remove_more_link_scroll' );
+add_filter( 'the_content_more_link', 'compete_themes_remove_more_link_scroll' );
 
 // Adds navigation through pages in the loop
-function ct_post_navigation() {
+function compete_themes_post_navigation() {
 
-    $arrows_left = ct_left_arrows_svg();
-    $arrows_right = ct_right_arrows_svg();
+    $arrows_left = compete_themes_left_arrows_svg();
+    $arrows_right = compete_themes_right_arrows_svg();
     $args = array(
         'prev_text' => "$arrows_left <span>Previous</span>",
         'next_text' => "<span>Next</span> $arrows_right"
@@ -302,9 +313,9 @@ function ct_post_navigation() {
 }
 
 // displays the social icons in the .entry-author div
-function ct_author_social_icons() {
+function compete_themes_author_social_icons() {
 
-	$social_sites = ct_create_social_array();
+	$social_sites = compete_themes_create_social_array();
     
     foreach($social_sites as $key => $social_site) {
     	if(get_the_author_meta( $social_site)) {
@@ -318,7 +329,7 @@ function ct_author_social_icons() {
 }
 
 // adds the client name from the project page
-function ct_project_client_display() {
+function compete_themes_project_client_display() {
     
     global $post;
     $client = get_post_meta( $post->ID, 'ct-done-project-client-meta-box', true );
@@ -330,7 +341,7 @@ function ct_project_client_display() {
 }
 
 // adds the date from the project page
-function ct_project_date_display() {
+function compete_themes_project_date_display() {
 
     global $post;
     $date = get_post_meta( $post->ID, 'ct-done-project-date-meta-box', true );
@@ -339,9 +350,11 @@ function ct_project_date_display() {
         echo "<div class='entry-date'><span>Date</span><p>$date</p></div>";
     }
 }
-function ct_project_category_display() {
+function compete_themes_project_category_display() {
 
-    $categories = get_terms('done_project_category');
+    global $post;
+
+    $categories = wp_get_post_terms($post->ID, 'done_project_category');
     $separator = ' & ';
     $output = '';
     if($categories){
@@ -355,7 +368,7 @@ function ct_project_category_display() {
 }
 
 // for displaying featured images including mobile versions and default versions
-function ct_featured_image() {
+function compete_themes_featured_image() {
 	
 	global $post;
 	$has_image = false;
@@ -371,7 +384,7 @@ function ct_featured_image() {
 }
 
 // does it contain a featured image?
-function ct_contains_featured() {
+function compete_themes_contains_featured() {
 
     global $post;
 	
@@ -383,8 +396,8 @@ function ct_contains_featured() {
 }
 
 // puts site title & description in the title tag on front page
-add_filter( 'wp_title', 'ct_add_homepage_title' );
-function ct_add_homepage_title( $title )
+add_filter( 'wp_title', 'compete_themes_add_homepage_title' );
+function compete_themes_add_homepage_title( $title )
 {
     if( empty( $title ) && ( is_home() || is_front_page() ) ) {
         return __( get_bloginfo( 'title' ), 'theme_domain' ) . ' | ' . get_bloginfo( 'description' );
@@ -393,14 +406,14 @@ function ct_add_homepage_title( $title )
 }
 
 // calls pages for menu if menu not set
-function ct_wp_page_menu() {
+function compete_themes_wp_page_menu() {
     wp_page_menu(array("menu_class" => "menu-unset"));
 }
 
-function ct_custom_color_css() {
+function compete_themes_custom_color_css() {
 
-    $primary_color = get_theme_mod( 'ct_primary_color');
-    $secondary_color = get_theme_mod( 'ct_secondary_color');
+    $primary_color = get_theme_mod( 'compete_themes_primary_color');
+    $secondary_color = get_theme_mod( 'compete_themes_secondary_color');
 
     /* if there is a custom colors section */
     if($primary_color || $secondary_color){
@@ -421,11 +434,11 @@ function ct_custom_color_css() {
         }
     }
 }
-add_action('wp_enqueue_scripts','ct_custom_color_css');
+add_action('wp_enqueue_scripts','compete_themes_custom_color_css');
 
-function ct_custom_layout_css(){
+function compete_themes_custom_layout_css(){
 
-    $layout = get_theme_mod('ct_layout_settings');
+    $layout = get_theme_mod('compete_themes_layout_settings');
 
     /* if the sidebar is on the left then add the necessary inline styles */
     if($layout == 'left') {
@@ -435,17 +448,17 @@ function ct_custom_layout_css(){
          * */
     }
 }
-add_action('wp_enqueue_scripts','ct_custom_layout_css');
+add_action('wp_enqueue_scripts','compete_themes_custom_layout_css');
 
-function ct_body_class( $classes ) {
+function compete_themes_body_class( $classes ) {
     if ( ! is_front_page() ) {
         $classes[] = 'not-front';
     }
     return $classes;
 }
-add_filter( 'body_class', 'ct_body_class' );
+add_filter( 'body_class', 'compete_themes_body_class' );
 
-function ct_left_arrows_svg() {
+function compete_themes_left_arrows_svg() {
 
     $svg = '
     <svg class="arrows-left" width="12px" height="21px" viewBox="0 0 14 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
@@ -463,7 +476,7 @@ function ct_left_arrows_svg() {
     return $svg;
 }
 
-function ct_right_arrows_svg() {
+function compete_themes_right_arrows_svg() {
 
     $svg = '
     <svg class="arrows-right" width="12px" height="21px" viewBox="0 0 14 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
@@ -481,7 +494,7 @@ function ct_right_arrows_svg() {
     return $svg;
 }
 
-function ct_downward_arrows_svg() {
+function compete_themes_downward_arrows_svg() {
 
     $svg = '
     <svg id="downward-arrows" class="downward-arrows"  width="14px" height="10px" viewBox="0 0 14 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
@@ -503,14 +516,33 @@ function ct_downward_arrows_svg() {
     return $svg;
 }
 
-function ct_default_contact_form() {
+function compete_themes_toggle_nav_svg(){
+
+$svg = '
+    <svg width="24px" height="20px" viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>Menu Hamburger icon</title>
+    <description>hamburger icon for toggling menu</description>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="toggle-nav" sketch:type="MSLayerGroup" fill="#E6E6E6">
+            <rect id="bottom" sketch:type="MSShapeGroup" x="0" y="16" width="24" height="4"></rect>
+            <rect id="middle" sketch:type="MSShapeGroup" x="0" y="8" width="24" height="4"></rect>
+            <rect id="top" sketch:type="MSShapeGroup" x="0" y="0" width="24" height="4"></rect>
+        </g>
+    </g>
+</svg>';
+
+    return $svg;
+}
+
+function compete_themes_default_contact_form() {
 
     /* uses Very Simple Contact Form by Guide van der Leest */
     echo do_shortcode('[contact]');
 }
 
 /* if "done" is active, hides from wordpress repo update checks in case a theme called "done" is added to the repo */
-function ct_hidden_theme( $r, $url ) {
+function compete_themes_hidden_theme( $r, $url ) {
     if ( 0 !== strpos( $url, 'http://api.wordpress.org/themes/update-check' ) )
         return $r; // Not a theme update request. Bail immediately.
 
@@ -521,6 +553,28 @@ function ct_hidden_theme( $r, $url ) {
     return $r;
 }
 
-add_filter( 'http_request_args', 'ct_hidden_theme', 5, 2 );
+add_filter( 'http_request_args', 'compete_themes_hidden_theme', 5, 2 );
+
+/* outputs the inline css to switch the layout if sidebar on left radio button is active */
+function compete_themes_logo_positioning_css(){
+
+    $updown =  get_theme_mod( 'logo_positioning_updown_setting');
+    $leftright =  get_theme_mod( 'logo_positioning_leftright_setting');
+
+    if($updown || $leftright){
+
+        $css = "
+            #site-header .logo {
+                position: relative;
+                bottom: " . $updown . "px;
+                left: " . $leftright . "px;
+                right: auto;
+                top: auto;
+        }";
+        wp_add_inline_style('style', $css);
+    }
+}
+
+add_action('wp_enqueue_scripts','compete_themes_logo_positioning_css');
 
 ?>

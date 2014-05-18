@@ -57,8 +57,7 @@
     padding-bottom: $baseline-height;
 
     h3 {
-      font-size: 1.3125em; /* 21px / 16px */
-      line-height: 1.143;
+      @extend %font-twenty-one;
       font-weight: 300;
     }
     a {
@@ -243,7 +242,8 @@
 /* 600px */
 @media all and (min-width: 37.5em){
 
-  .blog {
+  .blog,
+  .archive {
 
     .contact-banner {
       padding-top: $baseline-height * 3.5;
@@ -292,7 +292,7 @@
 
       h3 {
         font-size: 1.75em; /* 28px / 16px */
-        line-height: 1.714;
+        line-height: 1.321; /* 37px / 28px */
       }
       a {
         font-size: 1.3125em; /* 21px / 16px */
@@ -309,6 +309,7 @@
       }
       .contact-close-button {
         padding-bottom: $baseline-height;
+        border: none;
       }
     }
     .arrow-link {
@@ -332,7 +333,71 @@
   }
 }
 
-/* 1200px */
-@media all and (min-width: 75em){
+/* Dark Theme Styles */
 
+.contact-banner.dark-theme {
+  color: $gray;
+
+  a {
+    color: $gray;
+    border: solid 1px $gray;
+
+    &:link,
+    &:visited {
+      color: $gray;
+    }
+  }
+  .banner-content {
+
+    .downward-arrows {
+
+      .arrow {
+        stroke: $gray;
+      }
+    }
+    .contact-close-button {
+
+      &:hover,
+      &:active,
+      &:focus {
+        color: $gray;
+      }
+    }
+    .contact-form {
+
+      label,
+      input,
+      textarea {
+        color: $gray !important;
+      }
+      input,
+      textarea {
+        border: solid 1px $gray !important;
+      }
+      ::-webkit-input-placeholder {
+        color: $gray;
+      }
+      :-moz-placeholder /* Firefox 18- */ {
+        color: $gray;
+      }
+      ::-moz-placeholder /* Firefox 19+ */ {
+        color: $gray;
+      }
+      :-ms-input-placeholder {
+        color: $gray;
+      }
+      .scf_reset {
+
+        a {
+
+          &:hover,
+          &:active,
+          &:focus {
+            color: $gray;
+          }
+        }
+      }
+    }
+  }
 }
+

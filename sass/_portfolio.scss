@@ -318,7 +318,8 @@
             background: linear-gradient(rgba(43,43,43,0.8) 0%, rgba(43,43,43,0.8) 60%, rgba(43,43,43,1) 100%);
           }
         }
-        &:hover {
+        &:hover,
+        &.focused {
 
           .content {
             opacity: 1;
@@ -339,6 +340,14 @@
           left: 0;
           bottom: 0;
           z-index: 9;
+
+          &:focus {
+
+            + div {
+              opacity: 1;
+              transform: translateX(5px);
+            }
+          }
         }
         &:nth-child(even){
           margin: 0;

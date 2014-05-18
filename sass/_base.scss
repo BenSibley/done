@@ -67,8 +67,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 h1 {
-  font-size: 1.75em; /* 28px / 16px */
-  line-height: 1.714;
+  @extend %font-twenty-eight;
 }
 h2 {
   @extend %font-twenty-one;
@@ -217,6 +216,12 @@ input[type="submit"]:hover {
   color: $gray;
   border-color: $gray-medium-light;
 }
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
 ::-webkit-input-placeholder {
   font-weight: 300;
   color: $gray-medium;
@@ -264,7 +269,7 @@ a img {
   }
   h2 {
     font-size: 1.75em; /* 28px / 16px */
-    line-height: 1.714;
+    line-height: 1.321; /* 37px / 28px */
   }
   h3 {
     font-size: 1.3125em; /* 21px / 16px */

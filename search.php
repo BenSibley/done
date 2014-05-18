@@ -15,7 +15,7 @@
     endif;
     ?>
     
-    <?php ct_post_navigation(); ?>
+    <?php compete_themes_post_navigation(); ?>
         
     <div class="search-bottom">
         <p>Can't find what you're looking for?  Try refining your search:</p>

@@ -1,0 +1,24 @@
+/* After Post Content Widget */
+.sidebar-after-content {
+  padding-top: $baseline-height;
+  margin-top: $baseline-height * 2;
+  border-top: solid 1px $gray-light;
+  color: $gray-medium;
+
+  a {
+    color: $green;
+
+    &:link {
+      color: $green;
+    }
+    &:visited {
+      color: $green-dark;
+    }
+    &:hover,
+    &:active,
+    &:focus {
+      color: $green;
+      text-decoration: underline;
+    }
+  }
+}
