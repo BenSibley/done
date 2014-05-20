@@ -165,9 +165,9 @@ function compete_themes_custom_colors($wp_customize) {
     );
     /* Add the color setting. */
     $wp_customize->add_setting(
-        'compete_themes_primary_color',
+        'compete_themes_accent_color',
         array(
-            'default'           => '#e5e5e5',
+            'default'           => '#3cbd78',
             'type'              => 'theme_mod',
             'capability'        => 'edit_theme_options',
             'sanitize_callback' => 'sanitize_hex_color',
@@ -178,19 +178,18 @@ function compete_themes_custom_colors($wp_customize) {
     $wp_customize->add_control(
         new WP_Customize_Color_Control(
             $wp_customize,
-            'primary_color',
+            'accent_color',
             array(
-                'label'      => __( 'Primary Color', 'done' ),
+                'label'      => __( 'Accent Color', 'done' ),
                 'section'    => 'ct-colors',
-                'settings'   => 'compete_themes_primary_color',
+                'settings'   => 'compete_themes_accent_color',
             ) )
     );
-
     /* Add the color setting. */
     $wp_customize->add_setting(
-        'compete_themes_secondary_color',
+        'compete_themes_accent_color_dark',
         array(
-            'default'           => '#333333',
+            'default'           => '#2c8a58',
             'type'              => 'theme_mod',
             'capability'        => 'edit_theme_options',
             'sanitize_callback' => 'sanitize_hex_color',
@@ -201,11 +200,11 @@ function compete_themes_custom_colors($wp_customize) {
     $wp_customize->add_control(
         new WP_Customize_Color_Control(
             $wp_customize,
-            'secondary_color',
+            'accent_color_dark',
             array(
-                'label'      => __( 'Secondary Color', 'done' ),
+                'label'      => __( 'Accent Color (Dark)', 'done' ),
                 'section'    => 'ct-colors',
-                'settings'   => 'compete_themes_secondary_color',
+                'settings'   => 'compete_themes_accent_color_dark',
             ) )
     );
 }
@@ -424,10 +423,24 @@ add_action( 'wp_dashboard_setup', 'compete_themes_add_dashboard_widget' );
 // outputs contents for widget created by aside_add_dashboard_widget
 function compete_themes_widget_contents() { ?>
 
-    <p>If you need support <a target='_blank' href='http://competethemes.com/documentation'>visit the documentation</a> or contact support at support@competethemes.com for assistance.</p>
-    <p>Please contact us before leaving a review - we can help you!</p>
+    <ol>
+        <li>For self-help, <a target="_blank" href="http://www.competethemes.com/documentation/done-knowledgebase/?utm_source=WordPress%20Dashboard&utm_medium=User%20Admin&utm_content=Done&utm_campaign=Admin%20Support%20Widgets">visit the knowledgebase</a></li>
+        <li>To contact support, email us at <a href="mailto:support@competethemes.com">support@competethemes.com</a></li>
+    </ol>
 	
 	<?php
 }
+
+function compete_themes_support_widget_styles() {
+
+    echo "
+    <style>
+        #compete_themes_dashboard_widget{background: white;}
+        #compete_themes_dashboard_widget h3{background: #E54C56; color: white;}
+    </style>";
+
+}
+
+add_action('admin_head', 'compete_themes_support_widget_styles');
 
 ?>

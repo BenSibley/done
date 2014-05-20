@@ -12,7 +12,7 @@
   margin-bottom: $baseline-height;
 }
 .entry-author {
-  font-weight: 100;
+  font-weight: 300;
   margin: 0;
 
   a {
@@ -40,7 +40,9 @@
   color: $gray-medium-dark;
 
   span {
-    font-weight: 100;
+    font-weight: 300;
+    font-size: 0.75em;
+    line-height: 2;
   }
   p {
     margin: 0 0 $baseline-height;
@@ -141,6 +143,17 @@
   a {
     @extend %font-twenty-one;
     margin-right: $baseline-height / 4;
+    color: $gray-medium-dark;
+
+    &:link,
+    &:visited {
+      color: $gray-medium-dark;
+    }
+    &:hover,
+    &:active,
+    &:focus {
+      color: $green;
+    }
   }
 }
 
@@ -234,7 +247,7 @@
     }
   }
   .author-social-icons {
-    margin-top: 14px;
+    margin-top: 8px;
   }
 }
 

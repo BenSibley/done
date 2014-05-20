@@ -19,7 +19,7 @@
 .site-header {
   background: $gray;
   padding: $baseline-height $column * 3;
-  z-index: 9;
+  z-index: 29;
   position: relative;
   line-height: 0;
 
@@ -72,12 +72,11 @@
   &:hover,
   &:active,
   &:focus {
-    color: white;
     cursor: pointer;
     outline: none;
 
       rect {
-        fill: white;
+        fill: $green;
       }
     }
   rect {
@@ -114,7 +113,7 @@
           margin: 0;
           padding: $baseline-height / 2;
           opacity: 0.7;
-          font-weight: 100;
+          font-weight: 300;
           background: $gray-dark;
           backface-visibility: hidden;
 
@@ -172,6 +171,9 @@
   }
   .search-form-container {
     transform: translateX(100%);
+  }
+  .toggle-navigation rect {
+    fill: $green;
   }
 }
 
@@ -318,7 +320,6 @@
           display: inline-block;
           margin-right: $baseline-height / 2;
           padding: $baseline-height / 4 $baseline-height / 1.5;
-          font-weight: 100;
           border: solid 1px transparent;
           border-radius: $baseline-height;
 
@@ -360,6 +361,7 @@
       right: 0;
       width: auto;
       bottom: auto;
+      z-index: 39;
 
       input[type="search"] {
         max-width: $baseline-height * 4;
@@ -370,10 +372,16 @@
       }
       i {
         color: $gray-medium-light;
+        z-index: 40;
+
+        &:hover {
+          cursor: pointer;
+          color: white;
+        }
       }
       .submit-proxy {
         background: none;
-        z-index: 19;
+        z-index: 49;
 
         &:hover {
           cursor: pointer;
@@ -386,9 +394,17 @@
       .search-submit {
         background: none;
         z-index: -1;
+        height: 50px;
       }
       input[type="submit"] {
         transition: none;
+      }
+      .dark-overlay {
+        position: fixed;
+        background: rgba(0,0,0,0);
+        transition: background 0.4s ease;
+        max-width: none;
+        z-index: -1;
       }
     }
     #submit-proxy-checkbox:checked {
@@ -409,13 +425,12 @@
         max-width: $baseline-height * 14;
         transition: all 0.3s ease;
         min-width: $baseline-height * 14;
-        box-shadow: 0 0 12px 0 $gray-dark;
       }
-      &:after {
-        top: -9999px;
-        bottom: -9999px;
-        left: -9999px;
-        right: -9999px;
+      ~ .dark-overlay {
+        top: -2000px;
+        bottom: -2000px;
+        left: -2000px;
+        right: -2000px;
         background: rgba(0,0,0,0.4);
       }
     }

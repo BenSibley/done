@@ -107,7 +107,7 @@ if(compete_themes_get_option('banner_theme') == 'dark'){
 
 <div id="contact-banner" class="contact-banner <?php echo $banner_theme ?>" style="background-image: url('<?php echo compete_themes_get_option('banner_background_image'); ?>');">
     <div class="top">
-        <h3><?php echo compete_themes_get_option('banner_heading'); ?></h3>
+        <h3><?php echo stripslashes(compete_themes_get_option('banner_heading')); ?></h3>
         <a href="#banner-content" id="contact-open-button" class="contact-open-button"><?php echo compete_themes_get_option('banner_button_text'); ?></a>
     </div>
     <div id="banner-content" class="banner-content">

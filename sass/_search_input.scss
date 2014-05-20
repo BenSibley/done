@@ -2,12 +2,13 @@
   position: absolute;
   top: -9999px;
 
+  /*
   &:after {
     content: '';
     position: fixed;
     background: rgba(0,0,0,0);
     transition: background 0.4s ease;
-  }
+  }*/
 }
 .search-form {
 
@@ -22,6 +23,7 @@
   }
   input[type="search"]{
     transform: translateZ(0);
+    min-height: 50px; /* IE not respecting line-height */
 
     &:focus {
       border-color: $gray-medium-light;

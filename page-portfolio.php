@@ -37,7 +37,7 @@ function compete_themes_display_filter_options(){
     $tax_terms = get_terms($taxonomy);
 
     $html = "<div id='dropdown-container' class='dropdown-container'>";
-    $html .= "<span id='filter-label'>Filter by Category</span>";
+    $html .= "<a href='#' id='filter-label'>Filter by Category</a>";
     $html .= compete_themes_downward_arrows_svg();
     $html .= "<ul class='dropdown'>";
     $html .= "<li><a class='current' href='#'>all</a></li>";

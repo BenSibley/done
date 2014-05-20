@@ -114,15 +114,16 @@
         }
         &:hover,
         &:active,
-        &:visited {
+        &:focus {
           color: white;
           text-decoration: underline;
+          outline: none;
         }
       }
     }
   }
   .gallery-navigation {
-    margin: $baseline-height 0 $baseline-height * 3;
+    margin: $baseline-height * 2 0 $baseline-height * 3;
 
     ul {
       list-style: none;
@@ -136,6 +137,7 @@
       margin: 0 $baseline-height / 2;
       position: relative;
       z-index: 9;
+      backface-visibility: hidden;
 
       &.current {
 
@@ -183,13 +185,13 @@
     &:hover {
       cursor: pointer;
     }
-    span {
+    > a {
       float: left;
     }
     &.open {
       overflow: visible;
 
-      span {
+      > a {
         color: $green;
         display: block;
       }
@@ -232,13 +234,6 @@
 
   .page-template-page-portfolio-php {
 
-    .content {
-
-      h2 {
-
-      }
-
-    }
     .portfolio-items {
       margin-top: $baseline-height * 2;
 
@@ -284,6 +279,9 @@
       &:after {
         @include clearfix;
       }
+    }
+    .gallery-navigation {
+      margin-bottom: $baseline-height * 4;
     }
   }
 }
@@ -392,12 +390,12 @@
       overflow: visible;
       border: none;
 
-      span {
+      > a {
         display: none;
       }
       &.open {
 
-        span {
+        > a {
           display: none;
         }
       }
@@ -438,6 +436,7 @@
           &:focus {
             border-color: $gray-light;
             color: $gray;
+            outline: none;
           }
         }
       }

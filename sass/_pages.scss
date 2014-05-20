@@ -12,7 +12,7 @@
 
   p {
     margin: 0;
-    font-weight: 300;
+    font-weight: 100;
   }
 }
 /* 700px */
@@ -20,12 +20,6 @@
 
   .archive-header {
     margin-top: $baseline-height;
-
-    p {
-      font-size: 1.3125em; /* 21px / 16px */
-      line-height: 1.143;
-      font-weight: 100;
-    }
   }
 }
 
@@ -75,6 +69,10 @@
   .excerpt {
     padding: 0;
     margin: $baseline-height * 2 0;
+  }
+  .excerpt-content {
+    width: auto;
+    float: none;
   }
   h1 {
     margin-bottom: $baseline-height * 0.857;

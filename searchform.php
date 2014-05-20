@@ -7,6 +7,7 @@
             <input type="search" class="search-field" placeholder="Search for..." value="" name="s" title="Search for:" />
             <i class="fa fa-search"></i>
             <input type="submit" tabindex="-1" class="search-submit" value='' />
+            <div class="dark-overlay"></div>
         </div>
     </form>
 </div>

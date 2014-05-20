@@ -7,11 +7,7 @@ function compete_themes_load_javascript_files() {
     wp_register_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
 
     if(! is_admin() ) {
-        wp_enqueue_script('functions', get_template_directory_uri() . '/js/functions.js', array('jquery'),'', true);
-        wp_enqueue_script('fitvids', get_template_directory_uri() . '/js/fitvids.min.js', array('jquery'),'', true);
-        wp_enqueue_script('placeholders', get_template_directory_uri() . '/js/placeholders.min.js', array('jquery'),'', true);
-        wp_enqueue_script('media-query-polyfill', get_template_directory_uri() . '/js/respond.min.js', array('jquery'),'', true);
-        wp_enqueue_script('tappy', get_template_directory_uri() . '/js/tappy.min.js', array('jquery'),'', true);
+        wp_enqueue_script('production', get_template_directory_uri() . '/js/build/production.min.js', array('jquery'),'', true);
 
         wp_enqueue_style('google-fonts');
         wp_enqueue_style('font-awesome');
@@ -92,10 +88,10 @@ function compete_themes_social_media_icons() {
 		foreach ($active_sites as $active_site) {?>
 			<li>
 				<a href="<?php echo esc_url(get_theme_mod( $active_site )); ?>">
-					<?php if( $active_site == "vimeo") { ?>
-						<i class="fa fa-<?php echo $active_site; ?>-square"></i> <?php
+					<?php if( $active_site == "flickr" || $active_site == "dribbble" || $active_site == "instagram" ) { ?>
+						<i class="fa fa-<?php echo $active_site; ?>"></i> <?php
 					} else { ?>
-						<i class="fa fa-<?php echo $active_site; ?>"></i><?php 
+						<i class="fa fa-<?php echo $active_site; ?>-square"></i><?php
 					} ?>
 				</a>
 			</li><?php
@@ -262,7 +258,7 @@ function compete_themes_excerpt() {
 	*  works for both manual excerpts and read more tags
 	*/
     if($ismore) {
-        the_content("Read the Post <span class='screen-reader-text'>" . get_the_title() . "</span>");
+        the_content("read more <span class='screen-reader-text'>" . get_the_title() . "</span>");
     } elseif(get_post_format() == ('aside' || 'status')) {
     	the_content();
     }
@@ -275,7 +271,7 @@ function compete_themes_excerpt() {
 // for custom & automatic excerpts
 function compete_themes_excerpt_read_more_link($output) {
 	global $post;
-	return $output . "<p><a class='more-link' href='". get_permalink() ."'>Read the Post <span class='screen-reader-text'>" . get_the_title() . "</span></a></p>";
+	return $output . "<p><a class='more-link' href='". get_permalink() ."'>read more <span class='screen-reader-text'>" . get_the_title() . "</span></a></p>";
 }
 
 add_filter('the_excerpt', 'compete_themes_excerpt_read_more_link');
@@ -410,46 +406,6 @@ function compete_themes_wp_page_menu() {
     wp_page_menu(array("menu_class" => "menu-unset"));
 }
 
-function compete_themes_custom_color_css() {
-
-    $primary_color = get_theme_mod( 'compete_themes_primary_color');
-    $secondary_color = get_theme_mod( 'compete_themes_secondary_color');
-
-    /* if there is a custom colors section */
-    if($primary_color || $secondary_color){
-
-        /* if it is not the default color, add the inline styles */
-        if($primary_color != "#e5e5e5") {
-            /*
-             * $primary_css = stuff;
-             */
-            /* wp_add_inline_style('style', $primary_css); */
-        }
-        /* if it is not the default color, add the inline styles */
-        if($secondary_color != "#333333") {
-            /*
-             * $secondary_css = stuff;
-             */
-            /* wp_add_inline_style('style', $secondary_css); */
-        }
-    }
-}
-add_action('wp_enqueue_scripts','compete_themes_custom_color_css');
-
-function compete_themes_custom_layout_css(){
-
-    $layout = get_theme_mod('compete_themes_layout_settings');
-
-    /* if the sidebar is on the left then add the necessary inline styles */
-    if($layout == 'left') {
-        /*
-         * $css = stuff;
-         * wp_add_inline_style('style', $css);
-         * */
-    }
-}
-add_action('wp_enqueue_scripts','compete_themes_custom_layout_css');
-
 function compete_themes_body_class( $classes ) {
     if ( ! is_front_page() ) {
         $classes[] = 'not-front';
@@ -535,12 +491,6 @@ $svg = '
     return $svg;
 }
 
-function compete_themes_default_contact_form() {
-
-    /* uses Very Simple Contact Form by Guide van der Leest */
-    echo do_shortcode('[contact]');
-}
-
 /* if "done" is active, hides from wordpress repo update checks in case a theme called "done" is added to the repo */
 function compete_themes_hidden_theme( $r, $url ) {
     if ( 0 !== strpos( $url, 'http://api.wordpress.org/themes/update-check' ) )
@@ -576,5 +526,66 @@ function compete_themes_logo_positioning_css(){
 }
 
 add_action('wp_enqueue_scripts','compete_themes_logo_positioning_css');
+
+function compete_themes_custom_color_css() {
+
+    $accent_color = get_theme_mod( 'compete_themes_accent_color');
+    $accent_color_dark = get_theme_mod( 'compete_themes_accent_color_dark');
+
+    /* if there is a custom colors section */
+    if($accent_color || $accent_color_dark){
+
+        /* if it is not the default color, add the inline styles */
+        if($accent_color != "#3cbd78") {
+
+            $accent_color_css = "
+                a:hover, a:active, a:focus, article a:link, .loop-pagination .next:hover, .loop-pagination .next:active, .loop-pagination .next:focus, .loop-pagination .prev:hover, .loop-pagination .prev:active,.loop-pagination .prev:focus, .entry-author a:link, .entry-author a:visited, .entry-author a, .entry-meta a:hover, .entry-meta a:active, .entry-meta a:focus, .further-reading a:hover, .loop-pagination a:hover, .comment-pagination a:hover, .further-reading a:active, .loop-pagination a:active, .comment-pagination a:active, .further-reading a:focus, .loop-pagination a:focus, .comment-pagination a:focus, .further-reading a:hover .arrow, .loop-pagination a:hover .arrow, .comment-pagination a:hover .arrow, .further-reading a:active .arrow, .loop-pagination a:active .arrow, .comment-pagination a:active .arrow, .further-reading a:focus .arrow, .loop-pagination a:focus .arrow, .comment-pagination a:focus .arrow, .author-social-icons a:hover, .author-social-icons a:active, .author-social-icons a:focus, .page-template-page-portfolio-php .dropdown-container.open span, .sidebar-after-content a, .sidebar-after-content a:link, .sidebar-after-content a:hover, .sidebar-after-content a:active, .sidebar-after-content a:focus {
+                    color: $accent_color;
+                }
+                blockquote, .wp-caption-text, input:focus, textarea:focus, .contact-banner .banner-content img {
+                    border-color: $accent_color;
+                }
+                input[type='submit'], .contact-banner, .contact-banner:after {
+                    background: $accent_color;
+                }
+                .page-template-page-portfolio-php .dropdown-container.open .downward-arrows path, .further-reading a:hover .arrow, .further-reading a:active .arrow, .further-reading a:focus .arrow {
+                    stroke: $accent_color;
+                }
+                .contact-banner .banner-content {
+                     background: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0, 0)), color-stop(50%, $accent_color));
+                     background: -webkit-linear-gradient(rgba(0,0,0, 0) 0%, $accent_color 50%);
+                     background: linear-gradient(rgba(0,0,0, 0) 0%, $accent_color 50%);
+                }
+                .toggle-navigation:hover rect, .toggle-navigation:active rect, .toggle-navigation:focus rect, .toggled .toggle-navigation rect {
+                    fill: $accent_color;
+                }
+            ";
+            wp_add_inline_style('style', $accent_color_css);
+        }
+        /* if it is not the default color, add the inline styles */
+        if($accent_color_dark != "#2c8a58") {
+
+            $accent_color_dark_css = "
+                article a:visited, .entry-author a:hover, .entry-author a:active, .entry-author a:focus, li.comment .author-name a:hover, li.comment .author-name a:active, li.comment .author-name a:focus,li.pingback .author-name a:hover,li.pingback .author-name a:active,li.pingback .author-name a:focus, .comment-reply-link:hover, .comment-reply-link:active, .comment-reply-link:focus,.comment-edit-link:hover,.comment-edit-link:active,.comment-edit-link:focus, .contact-banner.open .top a, .contact-banner.open .top a:link, .contact-banner.open .top a:visited, .contact-banner .top a:hover, .contact-banner .top a:active, .contact-banner .top a:focus, .contact-banner .banner-content .contact-close-button, .contact-banner .banner-content .contact-close-button:link, .contact-banner .banner-content .contact-close-button:visited, .sidebar-after-content a:visited {
+                    color: $accent_color_dark;
+                }
+                .contact-banner.open .top a, .contact-banner .top a:hover, .contact-banner .top a:active, .contact-banner .top a:focus {
+                    border-color: $accent_color_dark;
+                }
+                .contact-banner .banner-content .arrow-link:hover .arrow, .contact-banner .banner-content .arrow-link:active .arrow, .contact-banner .banner-content .arrow-link:focus .arrow {
+                    stroke: $accent_color_dark;
+                }
+                .contact-banner .banner-content .contact-form input[type='submit']:hover, .contact-banner .banner-content .contact-form input[type='submit']:active, .contact-banner .banner-content .contact-form input[type='submit']:focus, .contact-banner .banner-content .contact-form #simple-contact-form input:focus,.contact-banner .banner-content .contact-form #simple-contact-form textarea:focus {
+                    border-color: $accent_color_dark !important;
+                }
+                .contact-banner .banner-content .contact-form #simple-contact-form label {
+                    color: $accent_color_dark !important;
+                }
+            ";
+            wp_add_inline_style('style', $accent_color_dark_css);
+        }
+    }
+}
+add_action('wp_enqueue_scripts','compete_themes_custom_color_css');
 
 ?>

@@ -3,6 +3,12 @@
 if( is_home() ) { ?>
     <div class='excerpt <?php hybrid_post_class(); compete_themes_contains_featured(); ?>'>
         <div>
+            <div class="featured-image-container">
+                <a href="<?php the_permalink(); ?>">
+                    <?php compete_themes_featured_image(); ?>
+                    <span>read more <?php echo compete_themes_right_arrows_svg(); ?><span class='screen-reader-text'><?php the_title(); ?></span></span>
+                </a>
+            </div>
             <div class='excerpt-header'>
                 <div class='excerpt-date'>
                     <?php echo get_the_date('F jS, Y'); ?>
@@ -10,12 +16,6 @@ if( is_home() ) { ?>
                 <h1 class='excerpt-title'>
                     <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                 </h1>
-            </div>
-            <div class="featured-image-container">
-                <a href="<?php the_permalink(); ?>">
-                    <?php compete_themes_featured_image(); ?>
-                    <span>read more <?php echo compete_themes_right_arrows_svg(); ?></span>
-                </a>
             </div>
             <div class='excerpt-content'>
                 <article>
@@ -71,6 +71,12 @@ if( is_home() ) { ?>
 } else { ?>
     <div class='excerpt <?php hybrid_post_class(); compete_themes_contains_featured(); ?>'>
         <div>
+            <div class="featured-image-container">
+                <a href="<?php the_permalink(); ?>">
+                    <?php compete_themes_featured_image(); ?>
+                    <span>read more <?php echo compete_themes_right_arrows_svg(); ?><span class='screen-reader-text'><?php the_title(); ?></span></span>
+                </a>
+            </div>
             <div class='excerpt-header'>
                 <div class='excerpt-date'>
                     <?php echo get_the_date('F jS, Y'); ?>
@@ -78,12 +84,6 @@ if( is_home() ) { ?>
                 <h1 class='excerpt-title'>
                     <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                 </h1>
-            </div>
-            <div class="featured-image-container">
-                <a href="<?php the_permalink(); ?>">
-                    <?php compete_themes_featured_image(); ?>
-                    <span>read more <?php echo compete_themes_right_arrows_svg(); ?></span>
-                </a>
             </div>
             <div class='excerpt-content'>
                 <article>

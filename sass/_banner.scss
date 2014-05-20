@@ -16,6 +16,12 @@
     margin-bottom: $baseline-height;
   }
 }
+.ie9 .contact-banner:after {
+  opacity: 0.9;
+}
+.ie9 .contact-banner {
+  background-image: none !important;
+}
 .contact-banner {
   @extend %full-width;
   background: $green;
@@ -205,7 +211,6 @@
           opacity: 0;
           backface-visibility: hidden;
           transform: translateZ(0);
-
           color: $green-dark !important;
           font-weight: 400 !important;
           transition: all 0.3s ease;
@@ -222,6 +227,13 @@
         textarea {
           margin: 0;
           padding-top: $baseline-height * 1.4;
+        }
+        input,
+        textarea {
+
+          &:focus {
+            border-color: $green-dark !important;
+          }
         }
       }
       .scf_reset {
@@ -297,7 +309,8 @@
       a {
         font-size: 1.3125em; /* 21px / 16px */
         line-height: 1.143;
-        font-weight: 100;
+        font-weight: 300;
+        -webkit-font-smoothing: antialiased;
       }
     }
     .banner-content {
@@ -314,21 +327,6 @@
     }
     .arrow-link {
       display: none;
-    }
-  }
-}
-
-/* 1100px */
-@media all and (min-width: 68.75em){
-
-  .contact-banner {
-
-    .banner-content {
-
-      img {
-        width: $baseline-height * 7;
-        height: $baseline-height * 7;
-      }
     }
   }
 }
