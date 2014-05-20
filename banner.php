@@ -108,7 +108,7 @@ if(compete_themes_get_option('banner_theme') == 'dark'){
 <div id="contact-banner" class="contact-banner <?php echo $banner_theme ?>" style="background-image: url('<?php echo compete_themes_get_option('banner_background_image'); ?>');">
     <div class="top">
         <h3><?php echo stripslashes(compete_themes_get_option('banner_heading')); ?></h3>
-        <a href="#banner-content" id="contact-open-button" class="contact-open-button"><?php echo compete_themes_get_option('banner_button_text'); ?></a>
+        <a href="#banner-content" id="contact-open-button" class="contact-open-button"><?php echo stripslashes(compete_themes_get_option('banner_button_text')); ?></a>
     </div>
     <div id="banner-content" class="banner-content">
         <?php
@@ -118,13 +118,13 @@ if(compete_themes_get_option('banner_theme') == 'dark'){
             echo "<img src='" . compete_themes_get_option('banner_main_image_upload') . "' />";
         }
         ?>
-        <h2><?php echo compete_themes_get_option('banner_content_heading'); ?></h2>
-        <p><?php echo compete_themes_get_option('banner_main_content'); ?></p>
+        <h2><?php echo stripslashes(compete_themes_get_option('banner_content_heading')); ?></h2>
+        <p><?php echo stripslashes(compete_themes_get_option('banner_main_content')); ?></p>
         <?php
         if(compete_themes_get_option('banner_author_radio') == 'yes') {
             echo "<span>-". get_bloginfo('title') . "</span>";
         } else {
-            echo "<span>-". compete_themes_get_option('banner_author') . "</span>";
+            echo "<span>-". stripslashes(compete_themes_get_option('banner_author')) . "</span>";
         }
         ?>
         <a class="arrow-link" href="#contact-form">
