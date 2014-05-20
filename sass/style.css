@@ -4,7 +4,7 @@ Theme URI: http://competethemes.com/done
 Author: Compete Themes
 Author URI: http://competethemes.com/
 Description: This is a WordPress theme
-Version: 1.01
+Version: 1.03
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -1729,6 +1729,9 @@ li.pingback {
         .contact-banner .banner-content .contact-form #simple-contact-form label.active {
           opacity: 1;
           top: 0; }
+      .contact-banner .banner-content .contact-form #simple-contact-form .scf-response label {
+        opacity: 1;
+        top: 0; }
       .contact-banner .banner-content .contact-form #simple-contact-form input {
         margin: 0;
         height: 72px; }

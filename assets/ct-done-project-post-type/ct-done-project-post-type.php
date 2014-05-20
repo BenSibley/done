@@ -3,7 +3,7 @@
 Plugin Name: Done Project Post Type
 Description: Adds project post type used in portfolio
 Author: Compete Themes
-Version: 1.0
+Version: 1.1
 */
 
 add_action( 'init', 'compete_themes_create_project_post_type' );

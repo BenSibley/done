@@ -54,9 +54,9 @@ function compete_themes_theme_setup() {
     add_theme_support( 'hybrid-core-styles', array( 'style', 'reset', 'gallery' ) );
     add_theme_support( 'hybrid-core-sidebars', array( 'after-content' ) );
     add_theme_support( 'loop-pagination' );
-    add_theme_support( 'featured-header' );
     add_theme_support( 'cleaner-gallery' );
-    add_theme_support( 'automatic-feed-links' ); //from WordPress core not theme hybrid
+    add_theme_support( 'automatic-feed-links' ); // from WordPress core not theme hybrid
+    add_theme_support( 'post-thumbnails', array( 'post', 'done_project' ) ); // from WordPress core not theme hybrid
 
     // adds the file with the customizer functionality
     require_once( trailingslashit( get_template_directory() ) . 'functions-admin.php' );
@@ -259,8 +259,6 @@ function compete_themes_excerpt() {
 	*/
     if($ismore) {
         the_content("read more <span class='screen-reader-text'>" . get_the_title() . "</span>");
-    } elseif(get_post_format() == ('aside' || 'status')) {
-    	the_content();
     }
     // otherwise the excerpt is automatic, so output it
     else {
@@ -317,7 +315,10 @@ function compete_themes_author_social_icons() {
     	if(get_the_author_meta( $social_site)) {
     		if($key == 'flickr' || $key == 'dribbble' || $key == 'instagram') {
                 echo "<a href='".esc_attr(get_the_author_meta( $social_site))."'><i class=\"fa fa-$key\"></i></a>";
-			} else {
+			} elseif($key == 'googleplus') {
+                echo "<a href='".esc_attr(get_the_author_meta( $social_site))."'><i class=\"fa fa-google-plus-square\"></i></a>";
+            }
+            else {
 	    		echo "<a href='".esc_attr(get_the_author_meta( $social_site))."'><i class=\"fa fa-$key-square\"></i></a>";
 	    	}
     	}

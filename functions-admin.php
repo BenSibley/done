@@ -210,56 +210,6 @@ function compete_themes_custom_colors($wp_customize) {
 }
 add_action('customize_register', 'compete_themes_custom_colors');
 
-function compete_themes_customize_layout_options( $wp_customize ) {
-
-    /* Add the layout section. */
-    $wp_customize->add_section(
-        'ct-layout',
-        array(
-            'title'      => esc_html__( 'Layout', 'done' ),
-            'priority'   => 70,
-            'capability' => 'edit_theme_options'
-        )
-    );
-    /* Add the color setting. */
-    $wp_customize->add_setting(
-        'compete_themes_layout_settings',
-        array(
-            'default'           => 'right',
-            'type'              => 'theme_mod',
-            'capability'        => 'edit_theme_options',
-            'sanitize_callback' => 'compete_themes_sanitize_layout_settings',
-            //'transport'         => 'postMessage'
-        )
-    );
-    $wp_customize->add_control(
-            'compete_themes_sidebar_layout',
-            array(
-                'label'          => __( 'Sidebar on left or right?', 'done' ),
-                'section'        => 'ct-layout',
-                'settings'       => 'compete_themes_layout_settings',
-                'type'           => 'radio',
-                'choices'        => array(
-                    'right'   => 'Right',
-                    'left'  => 'Left'
-                )
-            )
-    );
-}
-add_action( 'customize_register', 'compete_themes_customize_layout_options' );
-
-function compete_themes_sanitize_layout_settings($input){
-    $valid = array(
-        'right' => 'Right',
-        'left' => 'Left'
-    );
-
-    if ( array_key_exists( $input, $valid ) ) {
-        return $input;
-    } else {
-        return '';
-    }
-}
 
 /* Custom meta boxes here */
 
@@ -315,7 +265,7 @@ function compete_themes_create_social_array() {
 		'instagram' => 'instagram_profile',
 		'flickr' => 'flickr_profile',
 		'dribbble' => 'dribbble_profile',
-        'RSS' => 'rss_profile'
+        'rss' => 'rss_profile'
 	);
 	
 	return $social_sites;

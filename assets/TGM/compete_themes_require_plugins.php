@@ -45,7 +45,7 @@ function compete_themes_register_required_plugins() {
             'slug'               => 'ct-done-project-post-type', // The plugin slug (typically the folder name).
             'source'             => trailingslashit( get_template_directory() ) . 'assets/ct-done-project-post-type/ct-done-project-post-type.zip', // The plugin source.
             'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-            'version'            => '1.0', // E.g. 1.0.0. If set, the active plugin must be this version or higher.
+            'version'            => '1.1', // E.g. 1.0.0. If set, the active plugin must be this version or higher.
             'force_activation'   => true, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
             'force_deactivation' => false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins.
             'external_url'       => '', // If set, overrides default API URL and points to an external URL.
@@ -71,7 +71,7 @@ function compete_themes_register_required_plugins() {
         'has_notices'  => true,                    // Show admin notices or not.
         'dismissable'  => true,                    // If false, a user cannot dismiss the nag message.
         'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
-        'is_automatic' => false,                   // Automatically activate plugins after installation or not.
+        'is_automatic' => true,                   // Automatically activate plugins after installation or not.
         'message'      => '',                      // Message to output right before the plugins table.
         'strings'      => array(
             'page_title'                      => __( 'Install Required Plugins', 'tgmpa' ),
