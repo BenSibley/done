@@ -399,6 +399,9 @@
           display: none;
         }
       }
+      &:hover {
+        cursor: auto;
+      }
     }
     .downward-arrows {
       display: none;

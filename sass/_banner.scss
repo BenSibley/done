@@ -172,11 +172,15 @@
       input[type='submit'] {
         height: 48px !important;
         padding: 0 !important;
+        background: white !important;
+        color: $green !important;
 
         &:hover,
         &:active,
         &:focus {
-          border-color: $green-dark !important;
+          border-color: white !important;
+          background: none !important;
+          color: white !important;
         }
       }
       ::-webkit-input-placeholder {
@@ -378,6 +382,18 @@
       input,
       textarea {
         border: solid 1px $gray !important;
+      }
+      input[type="submit"]{
+        background: $gray !important;
+        color: white !important;
+
+        &:hover,
+        &:active,
+        &:focus {
+          border-color: $gray !important;
+          background: none !important;
+          color: $gray !important;
+        }
       }
       ::-webkit-input-placeholder {
         color: $gray;

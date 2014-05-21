@@ -186,7 +186,6 @@ textarea {
   background: none;
   padding: 1em 1.5em;
   width: 100%;
-  max-width: $baseline-height * 10 * 1.85;
   border: solid 1px $gray-medium-light;
   border-radius: 24px;
   margin: $baseline-height / 2 0;
@@ -214,7 +213,6 @@ textarea {
   }
 }
 textarea {
-  max-width: $baseline-height * 15 * 1.85;
   overflow: auto; /* hide scrollbar in IE */
 }
 input[type="submit"] {

@@ -40,8 +40,8 @@ add_action( 'init', 'compete_themes_create_project_post_taxonomy', 0 );
 function compete_themes_create_project_post_taxonomy() {
     // Add new taxonomy, make it hierarchical (like categories)
     $labels = array(
-        'name'              => _x( 'Categories', 'categories' ),
-        'singular_name'     => _x( 'Category', 'category' ),
+        'name'              => _x( 'Project Categories', 'categories' ),
+        'singular_name'     => _x( 'Project Category', 'category' ),
         'search_items'      => __( 'Search Categories' ),
         'all_items'         => __( 'All Categories' ),
         'parent_item'       => __( 'Parent Category' ),

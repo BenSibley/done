@@ -106,6 +106,15 @@ li.pingback {
   p {
     margin: 0;
   }
+  input {
+    max-width: $baseline-height * 10 * 1.85;
+  }
+  input[type="submit"]{
+    max-width: $baseline-height * 5 * 1.85;
+  }
+  textarea {
+    max-width: $baseline-height * 15 * 1.85;
+  }
 }
 .comment-respond {
   margin-bottom: $baseline-height * 2;

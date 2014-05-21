@@ -543,6 +543,9 @@ function compete_themes_custom_color_css() {
                 a:hover, a:active, a:focus, article a:link, .loop-pagination .next:hover, .loop-pagination .next:active, .loop-pagination .next:focus, .loop-pagination .prev:hover, .loop-pagination .prev:active,.loop-pagination .prev:focus, .entry-author a:link, .entry-author a:visited, .entry-author a, .entry-meta a:hover, .entry-meta a:active, .entry-meta a:focus, .further-reading a:hover, .loop-pagination a:hover, .comment-pagination a:hover, .further-reading a:active, .loop-pagination a:active, .comment-pagination a:active, .further-reading a:focus, .loop-pagination a:focus, .comment-pagination a:focus, .further-reading a:hover .arrow, .loop-pagination a:hover .arrow, .comment-pagination a:hover .arrow, .further-reading a:active .arrow, .loop-pagination a:active .arrow, .comment-pagination a:active .arrow, .further-reading a:focus .arrow, .loop-pagination a:focus .arrow, .comment-pagination a:focus .arrow, .author-social-icons a:hover, .author-social-icons a:active, .author-social-icons a:focus, .page-template-page-portfolio-php .dropdown-container.open span, .sidebar-after-content a, .sidebar-after-content a:link, .sidebar-after-content a:hover, .sidebar-after-content a:active, .sidebar-after-content a:focus {
                     color: $accent_color;
                 }
+                .contact-banner .banner-content .contact-form input[type='submit'] {
+                    color: $accent_color !important;
+                }
                 blockquote, .wp-caption-text, input:focus, textarea:focus, .contact-banner .banner-content img {
                     border-color: $accent_color;
                 }
@@ -576,7 +579,7 @@ function compete_themes_custom_color_css() {
                 .contact-banner .banner-content .arrow-link:hover .arrow, .contact-banner .banner-content .arrow-link:active .arrow, .contact-banner .banner-content .arrow-link:focus .arrow {
                     stroke: $accent_color_dark;
                 }
-                .contact-banner .banner-content .contact-form input[type='submit']:hover, .contact-banner .banner-content .contact-form input[type='submit']:active, .contact-banner .banner-content .contact-form input[type='submit']:focus, .contact-banner .banner-content .contact-form #simple-contact-form input:focus,.contact-banner .banner-content .contact-form #simple-contact-form textarea:focus {
+                .contact-banner .banner-content .contact-form #simple-contact-form input:focus,.contact-banner .banner-content .contact-form #simple-contact-form textarea:focus {
                     border-color: $accent_color_dark !important;
                 }
                 .contact-banner .banner-content .contact-form #simple-contact-form label {
