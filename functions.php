@@ -369,15 +369,29 @@ function compete_themes_featured_image() {
 	
 	global $post;
 	$has_image = false;
-			
-	if (has_post_thumbnail( $post->ID ) ) {
-		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
-		$image = $image[0];
-		$has_image = true;
-	}  
+
+    // load small 400px version on archive pages and larger version on post pages
+    if(is_archive() || is_home()) {
+        if (has_post_thumbnail( $post->ID ) ) {
+            $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'portfolio-item' );
+            $image = $image[0];
+            $has_image = true;
+        } else {
+            if (has_post_thumbnail( $post->ID ) ) {
+                $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+                $image = $image[0];
+                $has_image = true;
+            }
+        }
+    }
 	if ($has_image == true) {
         echo "<div class='featured-image' style=\"background-image: url('".$image."')\"></div>";
     }
+}
+
+/* add a smaller size for the portfolio page */
+if( function_exists('add_image_size')){
+    add_image_size('portfolio-item', 400);
 }
 
 // does it contain a featured image?
@@ -591,5 +605,7 @@ function compete_themes_custom_color_css() {
     }
 }
 add_action('wp_enqueue_scripts','compete_themes_custom_color_css');
+
+
 
 ?>

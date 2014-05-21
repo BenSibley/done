@@ -67,7 +67,7 @@ function compete_themes_display_portfolio_items(){
         $html .= "<li class='portfolio-item all ". compete_themes_get_porftolio_item_category($portfolio_item). "'>";
         /* add the featured image as a background-image */
         if (has_post_thumbnail( $portfolio_item->ID ) ) {
-            $image = wp_get_attachment_image_src( get_post_thumbnail_id( $portfolio_item->ID ), 'single-post-thumbnail' );
+            $image = wp_get_attachment_image_src( get_post_thumbnail_id( $portfolio_item->ID ), 'portfolio-item' );
             $image = $image[0];
             $html .= "<div class='image-container' style=\"background-image: url('".$image."')\">";
         } else {
