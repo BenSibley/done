@@ -101,7 +101,7 @@
       border-radius: 50%;
       height: $baseline-height * 4;
       width: $baseline-height * 4;
-      border: solid 4px $green;
+      border: solid 3px #fff;
       margin-top: $baseline-height;
     }
     p {
@@ -363,6 +363,9 @@
       .arrow {
         stroke: $gray;
       }
+    }
+    img {
+      border-color: $gray;
     }
     .contact-close-button {
 

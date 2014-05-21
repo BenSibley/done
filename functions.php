@@ -546,7 +546,7 @@ function compete_themes_custom_color_css() {
                 .contact-banner .banner-content .contact-form input[type='submit'] {
                     color: $accent_color !important;
                 }
-                blockquote, .wp-caption-text, input:focus, textarea:focus, .contact-banner .banner-content img {
+                blockquote, .wp-caption-text, input:focus, textarea:focus, {
                     border-color: $accent_color;
                 }
                 input[type='submit'], .contact-banner, .contact-banner:after {

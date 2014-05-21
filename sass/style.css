@@ -4,7 +4,7 @@ Theme URI: http://competethemes.com/done
 Author: Compete Themes
 Author URI: http://competethemes.com/
 Description: This is a WordPress theme
-Version: 1.03
+Version: 1.05
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -1653,7 +1653,7 @@ li.pingback {
       border-radius: 50%;
       height: 6em;
       width: 6em;
-      border: solid 4px #3cbd78;
+      border: solid 3px #fff;
       margin-top: 1.5em; }
     .contact-banner .banner-content p {
       font-weight: 300; }
@@ -1810,6 +1810,8 @@ li.pingback {
       color: #2b2b2b; }
   .contact-banner.dark-theme .banner-content .downward-arrows .arrow {
     stroke: #2b2b2b; }
+  .contact-banner.dark-theme .banner-content img {
+    border-color: #2b2b2b; }
   .contact-banner.dark-theme .banner-content .contact-close-button:hover, .contact-banner.dark-theme .banner-content .contact-close-button:active, .contact-banner.dark-theme .banner-content .contact-close-button:focus {
     color: #2b2b2b; }
   .contact-banner.dark-theme .banner-content .contact-form label,

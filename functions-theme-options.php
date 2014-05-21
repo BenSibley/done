@@ -157,12 +157,12 @@ class compete_themes_theme_options_admin {
                 ),
                 array(
                     'name' => __( 'Contact Form', 'ct-' ),
-                    'desc' => __('use the bundled contact plugin or a different one?'),
+                    'desc' => __('You can customize the bundled contact form plugin in Settings &gt; SBCF'),
                     'id'   => 'banner_contact_form_radio',
                     'type' => 'radio',
                     'std'  => 'sbcf',
                     'options' => array(
-                        array( 'name' => 'Use "Simple Basic Contact Form"', 'value' => 'sbcf' ),
+                        array( 'name' => 'Use bundled contact form', 'value' => 'sbcf' ),
                         array( 'name' => 'Use different contact form', 'value' => 'shortcode' ),
                     ),
                 ),
